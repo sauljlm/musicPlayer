@@ -1,2 +1,13 @@
 @import 'helppers/variables';
 @import 'helppers/general';
+
+@import'components/allSongs';
+@import'components/playList';
+@import'components/player';
+@import'components/header';
+@import'components/nav';
+@import'components/import';
+
+@import 'patterns/btn';
+@import 'patterns/switch';
+@import 'patterns/search';

@@ -1,2 +1,16 @@
 @media (max-width: $breakpoint-lg){
 }
+body {
+  background-color: black;
+  font-family: 'Oswald', sans-serif;
+}
+
+.clearfix:after {
+  display: block;
+  content: "";
+  clear: both;
+}
+
+.hidde {
+  display: none;
+}

@@ -4,12 +4,90 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="normalize.css">
+  <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+  <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/styles.css">
   <title>music player</title>
 </head>
 <body>
-  <div id="container"></div>
+  <div id="container" class="js-songs">
+    <div class="header">
+      <button class="btn-header" id="songs">songs</button>
+      <button class="btn-header" id="import">import</button>
+    </div>
+    <div class="js-songs  songs clearfix">
+      <div class="songs-header">
+        <form>
+          <select id="formSort" class="formSort" name="order">
+            <option value="" selected disabled hidden>sort by</option>
+            <option value="artist">artist</option>
+            <option value="songName">songName</option>
+            <option value="year">year</option>
+            <option value="started">started</option>
+            <option value="album">album</option>
+          </select>
+        </form>
+        <button class="delite">delite</button>
+        <button class="edit">edit</button>
+        <form class="cont-search">
+          <input type="search" placeholder="Search">
+        </form>
+      </div>
+      <div id="songs" class="allSongs clearfix"></div>
+      <div id="playList" class="playList clearfix"></div>
+    </div>
+    <div class="js-import hidde import clearfix">
+      <form class="form-import">
+        <div class="column column-left">
+          <label for="Name">Name</label>
+          <input type="text" name="Name" id="name" required>
+
+          <label for="Artist">Artist</label>
+          <input type="text" name="Artist" id="artist" required>
+
+          <label for="Year">Year</label>
+          <input type="date" name="Year" id="year" required>
+
+          <label for="Album">Album</label>
+          <input type="text" name="Album" id="album" required>
+
+          <label class="switch">
+            <input type="checkbox" class="switch-input">
+            <span class="switch-label" data-on="On" data-off="Off"></span>
+            <span class="switch-handle"></span>
+          </label>
+        </div>
+
+        <div class="column column-right">
+          <label for="Image">Image</label>
+          <input type="text" name="Image" id="image">
+
+          <h3>Sources</h3>
+          <label for="mp3">MP3</label>
+          <input type="text" name="mp3" id="mp3">
+
+          <label for="wav">WAV</label>
+          <input type="text" name="wav" id="wav">
+
+          <label for="ogg">OGG</label>
+          <input type="text" name="ogg" id="ogg">
+        </div>
+
+        <div class="cont__form-nav">
+          <div class="form__nav">
+            <input id="save" class="form-btn" type="submit">save</input>
+            <input id="reset" class="form-btn" type="reset">reset</input>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="nav" id="cont-nav"></div>
+    <div class="cont-audio"></div>
+  </div>
+
+  <script src="js/mediator.js"></script>
+  <script src="js/singleton.js"></script>
+  <script src="js/player.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
