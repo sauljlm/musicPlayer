@@ -95,8 +95,8 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
   width: 100%;
   height: 25%;
   background-repeat: no-repeat;
-  background-position: center;
-  background-size: 60% 100%;
+  background-position: left;
+  background-size: 30% 100%;
   padding-bottom: 2%;
 }
 
@@ -146,7 +146,7 @@ label, input {
 }
 
 .songs-header {
-  width: 95%;
+  width: 94.7%;
   margin: 2% auto 0 auto;
   border: 1px solid #FF00E4;
   display: flex;
