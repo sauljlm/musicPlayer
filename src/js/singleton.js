@@ -2,13 +2,12 @@ const Singleton = (function () {
     let playing = 0;
     const SONGS_URL = 'songs';
 
-    // const PREFIX = 'song_data';
     let instance = null;
     let songs = [
       {
         title: "rockstar",
         artist: "Post Malone",
-        cover: "../img/rockstarCover.jpg",
+        cover: "rockstarCover.jpg",
         linkAudio: "rockstar.mp3",
         year: "2016",
         start: false
@@ -16,7 +15,7 @@ const Singleton = (function () {
       {
         title: "Adan y Eva",
         artist: "Paulo Londra",
-        cover: "../img/adanYevaCover.jpg",
+        cover: "adanYevaCover.jpg",
         linkAudio: "Adan_y_Eva.mp3",
         year: "2019",
         start: false
@@ -24,7 +23,7 @@ const Singleton = (function () {
       {
         title: "believer",
         artist: "Imagine Dragons",
-        cover: "../img/believerCover.jpg",
+        cover: "believerCover.jpg",
         linkAudio: "Believer.mp3",
         year: "2017",
         start: false
@@ -32,7 +31,7 @@ const Singleton = (function () {
       {
         title: "gansta's parade",
         artist: "Coolio",
-        cover: "../img/ganstaCover.jpg",
+        cover: "ganstaCover.jpg",
         linkAudio: "gansta's_paradice.mp3",
         year: "1995",
         start: false
@@ -40,7 +39,7 @@ const Singleton = (function () {
       {
         title: "Panda",
         artist: "Desiigner",
-        cover: "../img/pandaCover.jpg",
+        cover: "pandaCover.jpg",
         linkAudio: "panda.mp3",
         year: "2015",
         start: false
@@ -48,19 +47,22 @@ const Singleton = (function () {
       {
         title: "Without Me",
         artist: "Halsey",
-        cover: "../img/withoutMeCover.jpg",
+        cover: "withoutMeCover.jpg",
         linkAudio: "Without_Me.mp3",
         year: "2018",
         start: false
       }
     ];
 
-    return class Singleton {
+    let playList = [];
 
+    return class Singleton {
         constructor () {
             this._audio = null;
             this.playing = false;
-
+            this.cover = null;
+            this.contCover = document.querySelector('.js-cover');
+           
             if(!instance) {
                 // this.getStorage();
                 instance = this;
@@ -70,14 +72,38 @@ const Singleton = (function () {
         }
 
         set audio(data) {
+            if (!data){
+              throw new Error(`Invalid set audio is not a HTMLaudioElement: ${data}`);
+            }
             this._audio = data;
+        }
+
+        /**
+         * return array songs
+         */
+        get songsDATA () {
+          return songs;
+        }
+
+        /**
+         * return array playList
+         */
+        get playListDATA () {
+          return playList;
+        }
+
+        setCover() {
+          document.body.style.backgroundImage = `url(../img/${songs[playing].cover})`;
+          this.contCover.style.backgroundImage = `url(../img/${songs[playing].cover})`;
         }
 
         /**
          * Load the song
          */
         getSong () {
-            return `${SONGS_URL}/${songs[playing].linkAudio}`;
+          this.setCover();
+          // console.log(this.songsDATA);
+          return `${SONGS_URL}/${songs[playing].linkAudio}`;
         }
 
         /**
@@ -137,12 +163,12 @@ const Singleton = (function () {
             } else {
               this.play();
             }
-            console.log(this.playing);
-            // this.changeIco();
         }
 
-
         changeIco(btnPlaypase) {
+          if (!btnPlaypase) {
+            throw new Error(`Invalid btn is not a HTMLbtnElement: ${btnPlaypase}`);
+          }
           if(this.playing) {
             btnPlaypase.classList.add('btn-play');
             btnPlaypase.classList.remove('btn-pause');
@@ -150,6 +176,43 @@ const Singleton = (function () {
             btnPlaypase.classList.remove('btn-play');
             btnPlaypase.classList.add('btn-pause');
           }
+        }
+
+                /**
+         * Drop event handler
+         * @param {Event} event
+         * @returns {boolean}
+         */
+        drop (event) {
+          let id = event.dataTransfer.getData('text');
+          let todo = this.data.get(id);
+          if(!todo) return false;
+
+          // toggle the todo done status
+          this.data.toggleItem(todo);
+
+          // remove the element on the current list
+          todo.element.parentNode.removeChild(todo.element);
+
+          // add the todo
+          this.addTodo(todo);
+        }
+
+        /**
+         * Dragover event handler
+         * @param {Event} event
+         */
+        dragover (event) {
+            event.preventDefault()
+        }
+
+        /**
+         * Dragstart
+         * @param {Event} event
+         */
+        dragstart (event) {
+            let id = event.target.getAttribute('data-id');
+            event.dataTransfer.setData('text', id);
         }
     }
 })();

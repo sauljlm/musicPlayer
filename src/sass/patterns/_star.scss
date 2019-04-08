@@ -1,0 +1,16 @@
+.star {
+  width: 25px;
+  height: 25px;
+  background-size: container;
+  background-repeat: no-repeat;
+  border: none; 
+  float: right;
+}
+
+.starDefault{
+  background-image: url(../img/star.svg);
+}
+
+.starActive{
+  background-image: url(../img/.starActive.svg);
+} 

@@ -1,4 +1,15 @@
 .nav {
   display: flex;
   justify-content: center;
+  padding-top: 25px;
+}
+.js-cover {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 25%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60% 100%;
+  padding-bottom: 2%;
 }

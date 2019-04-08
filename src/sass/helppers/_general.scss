@@ -1,8 +1,9 @@
 @media (max-width: $breakpoint-lg){
 }
 body {
-  background-color: black;
   font-family: 'Oswald', sans-serif;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .clearfix:after {
@@ -13,4 +14,9 @@ body {
 
 .hidde {
   display: none;
+}
+
+#container {
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9);
 }

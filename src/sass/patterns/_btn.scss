@@ -1,6 +1,6 @@
 button {
   background-color: transparent;
-  margin: 2% 5%;
+  margin: 1% 5%;
   color: white;
   &:focus {
     outline:0px;
@@ -10,8 +10,8 @@ button {
 .btn {
   background-repeat: no-repeat;
   background-size: contain;
-  width: 50px;
-  height: 50px;
+  width: 35px;
+  height: 35px;
   border: none;
   border-radius: 50%;
   transition: 0.5s;
@@ -38,7 +38,7 @@ button {
 }
 
 .btn-header {
-  margin: 25px;
+  margin: 15px;
   margin-bottom: 0;
   width: 10%;
   padding: 10px;
@@ -63,4 +63,30 @@ button {
     background-color: #FF00E4;
     border: 1px solid white;
   }
+}
+
+.delite, .edit {
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 0.5% 50px;
+  height: 30px;
+  border: 1px solid #FF00E4;
+  transition: 0.5s;
+  margin: 0.5% 4%;
+  &:hover {
+    box-shadow: 2px 2px 25px 2px #FF00E4;
+  }
+}
+
+.formSort {
+  margin: 0.6%;
+  position: absolute;
+  left: 10%;
+  top: 0;
+}
+.cont-search {
+  margin: 0.2%;
+  height: 10px;
+  position: absolute;
+  right: 10%;
 }

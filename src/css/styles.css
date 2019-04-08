@@ -1,71 +1,109 @@
 body {
-  background-color: black;
-  font-family: 'Oswald', sans-serif; }
+  font-family: "Oswald", sans-serif;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 .clearfix:after {
   display: block;
   content: "";
-  clear: both; }
+  clear: both;
+}
 
 .hidde {
-  display: none; }
+  display: none;
+}
 
-.allSongs {
+#container {
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.contallSongs {
   box-sizing: border-box;
   width: 47.5%;
-  height: 400px;
-  margin: 0 0 2% 2.5%;
+  height: 348px;
+  margin: 0 0 0 2.5%;
   float: left;
-  border: 1px solid #FF00E4; }
+  border: 1px solid #FF00E4;
+  overflow: hidden;
+}
 
-.playList {
+.allsongs {
+  width: 100%;
+  padding: 0px;
+  margin: 0;
+}
+
+.contPlayList {
   box-sizing: border-box;
   width: 47.5%;
-  height: 400px;
-  margin: 0 2.5% 2% 0;
+  height: 348px;
+  margin: 0 2.5% 0 0;
   float: left;
-  border: 1px solid #FF00E4; }
+  border: 1px solid #FF00E4;
+}
 
 audio {
   width: 40%;
-  background-color: white;
+  background-color: #FF00E4;
   -webkit-transition: all 0.5s linear;
   -moz-transition: all 0.5s linear;
   -o-transition: all 0.5s linear;
   transition: all 0.5s linear;
   box-shadow: 2px 2px 25px 2px #FF00E4;
-  border-radius: none; }
+  border-radius: none;
+  position: absolute;
+  bottom: 0;
+}
 
 audio::-webkit-media-controls-mute-button {
-  display: none; }
+  display: none;
+}
 
 audio::-webkit-media-controls-play-button {
-  display: none; }
-
-audio::-webkit-media-controls-toggle-closed-captions-button {
-  background-color: red; }
+  display: none;
+}
 
 audio::-webkit-media-controls-panel {
-  background-color: white; }
+  background-color: #FF00E4;
+}
 
 audio::-webkit-media-controls-toggle-closed-captions-button {
-  display: none; }
+  display: none;
+}
 
 .cont-audio {
   display: flex;
-  justify-content: center; }
+  justify-content: center;
+}
 
 .header {
   display: flex;
-  justify-content: center; }
+  justify-content: center;
+}
 
 .nav {
   display: flex;
-  justify-content: center; }
+  justify-content: center;
+  padding-top: 25px;
+}
+
+.js-cover {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 25%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60% 100%;
+  padding-bottom: 2%;
+}
 
 .column {
   float: left;
-  width: 47.5%; }
+  width: 47.5%;
+}
 
 .column-left {
   box-sizing: border-box;
@@ -73,7 +111,8 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
   height: 400px;
   float: left;
   border: 1px solid #FF00E4;
-  padding: 2%; }
+  padding: 2%;
+}
 
 .column-right {
   box-sizing: border-box;
@@ -81,87 +120,91 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
   height: 400px;
   float: left;
   border: 1px solid #FF00E4;
-  padding: 2%; }
+  padding: 2%;
+}
 
 .form-import {
   border: 1px solid #FF00E4;
-  margin: 2.5% 0; }
-  .form-import h3 {
-    color: white; }
+  margin: 2.5% 0;
+}
+.form-import h3 {
+  color: white;
+}
 
 label {
   color: white;
-  float: left; }
+  float: left;
+}
 
 label, input {
   display: block;
-  margin: 0 25px 25px 25px; }
+  margin: 0 25px 25px 25px;
+}
 
 .cont__form-nav {
-  text-align: center; }
+  text-align: center;
+}
 
 .songs-header {
   width: 95%;
-  margin: 2.5% auto 0 auto;
+  margin: 2% auto 0 auto;
   border: 1px solid #FF00E4;
   display: flex;
   flex-direction: row;
-  justify-content: center; }
-  .songs-header .formSort {
-    margin: 25%; }
-  .songs-header .cont-search {
-    margin: 1%;
-    height: 10px; }
-  .songs-header .delite, .songs-header .edit {
-    background-repeat: no-repeat;
-    background-size: contain;
-    padding: 20px 50px;
-    border: 1px solid #FF00E4;
-    transition: 0.5s;
-    margin: 1% 2.5%; }
-    .songs-header .delite:hover, .songs-header .edit:hover {
-      box-shadow: 2px 2px 25px 2px #FF00E4; }
+  justify-content: center;
+  position: relative;
+}
 
 button {
   background-color: transparent;
-  margin: 2% 5%;
-  color: white; }
-  button:focus {
-    outline: 0px; }
+  margin: 1% 5%;
+  color: white;
+}
+button:focus {
+  outline: 0px;
+}
 
 .btn {
   background-repeat: no-repeat;
   background-size: contain;
-  width: 50px;
-  height: 50px;
+  width: 35px;
+  height: 35px;
   border: none;
   border-radius: 50%;
-  transition: 0.5s; }
-  .btn:hover {
-    box-shadow: 2px 2px 25px 2px #FF00E4; }
+  transition: 0.5s;
+}
+.btn:hover {
+  box-shadow: 2px 2px 25px 2px #FF00E4;
+}
 
 .btn-play {
-  background-image: url("../img/play.svg"); }
+  background-image: url("../img/play.svg");
+}
 
 .btn-pause {
-  background-image: url("../img/pause.svg"); }
+  background-image: url("../img/pause.svg");
+}
 
 .btn-back {
-  background-image: url("../img/back.svg"); }
+  background-image: url("../img/back.svg");
+}
 
 .btn-next {
-  background-image: url("../img/next.svg"); }
+  background-image: url("../img/next.svg");
+}
 
 .btn-header {
-  margin: 25px;
+  margin: 15px;
   margin-bottom: 0;
   width: 10%;
   padding: 10px;
   transition: 0.5s;
-  font-size: 20px; }
-  .btn-header:hover {
-    box-shadow: 2px 2px 25px 2px #FF00E4;
-    transition: 0.5s; }
+  font-size: 20px;
+}
+.btn-header:hover {
+  box-shadow: 2px 2px 25px 2px #FF00E4;
+  transition: 0.5s;
+}
 
 .form-btn {
   display: inline-block;
@@ -170,20 +213,51 @@ button {
   color: white;
   padding: 10px 20px;
   margin: 1% 10%;
-  border: 1px solid #FF00E4; }
-  .form-btn:hover {
-    transition: 0.5s;
-    background-color: #FF00E4;
-    border: 1px solid white; }
+  border: 1px solid #FF00E4;
+}
+.form-btn:hover {
+  transition: 0.5s;
+  background-color: #FF00E4;
+  border: 1px solid white;
+}
+
+.delite, .edit {
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 0.5% 50px;
+  height: 30px;
+  border: 1px solid #FF00E4;
+  transition: 0.5s;
+  margin: 0.5% 4%;
+}
+.delite:hover, .edit:hover {
+  box-shadow: 2px 2px 25px 2px #FF00E4;
+}
+
+.formSort {
+  margin: 0.6%;
+  position: absolute;
+  left: 10%;
+  top: 0;
+}
+
+.cont-search {
+  margin: 0.2%;
+  height: 10px;
+  position: absolute;
+  right: 10%;
+}
 
 blockquote:before, blockquote:after,
 q:before, q:after {
-  content: '';
-  content: none; }
+  content: "";
+  content: none;
+}
 
 .container > .switch {
   display: block;
-  margin: 12px auto; }
+  margin: 12px auto;
+}
 
 .switch {
   position: relative;
@@ -199,13 +273,15 @@ q:before, q:after {
   background-image: -webkit-linear-gradient(top, #eeeeee, white 25px);
   background-image: -moz-linear-gradient(top, #eeeeee, white 25px);
   background-image: -o-linear-gradient(top, #eeeeee, white 25px);
-  background-image: linear-gradient(to bottom, #eeeeee, white 25px); }
+  background-image: linear-gradient(to bottom, #eeeeee, white 25px);
+}
 
 .switch-input {
   position: absolute;
   top: 0;
   left: 0;
-  opacity: 0; }
+  opacity: 0;
+}
 
 .switch-label {
   position: relative;
@@ -223,40 +299,47 @@ q:before, q:after {
   -webkit-transition-property: opacity background;
   -moz-transition-property: opacity background;
   -o-transition-property: opacity background;
-  transition-property: opacity background; }
+  transition-property: opacity background;
+}
 
 .switch-label:before, .switch-label:after {
   position: absolute;
   top: 50%;
-  margin-top: -.5em;
+  margin-top: -0.5em;
   line-height: 1;
   -webkit-transition: inherit;
   -moz-transition: inherit;
   -o-transition: inherit;
-  transition: inherit; }
+  transition: inherit;
+}
 
 .switch-label:before {
   content: attr(data-off);
   right: 11px;
   color: #aaa;
-  text-shadow: 0 1px rgba(255, 255, 255, 0.5); }
+  text-shadow: 0 1px rgba(255, 255, 255, 0.5);
+}
 
 .switch-label:after {
   content: attr(data-on);
   left: 11px;
   color: white;
   text-shadow: 0 1px rgba(0, 0, 0, 0.2);
-  opacity: 0; }
+  opacity: 0;
+}
 
 .switch-input:checked ~ .switch-label {
   background: #47a8d8;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 0 3px rgba(0, 0, 0, 0.2); }
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 0 3px rgba(0, 0, 0, 0.2);
+}
 
 .switch-input:checked ~ .switch-label:before {
-  opacity: 0; }
+  opacity: 0;
+}
 
 .switch-input:checked ~ .switch-label:after {
-  opacity: 1; }
+  opacity: 1;
+}
 
 .switch-handle {
   position: absolute;
@@ -274,10 +357,11 @@ q:before, q:after {
   -webkit-transition: left 0.15s ease-out;
   -moz-transition: left 0.15s ease-out;
   -o-transition: left 0.15s ease-out;
-  transition: left 0.15s ease-out; }
+  transition: left 0.15s ease-out;
+}
 
 .switch-handle:before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -290,14 +374,17 @@ q:before, q:after {
   background-image: -webkit-linear-gradient(top, #eeeeee, white);
   background-image: -moz-linear-gradient(top, #eeeeee, white);
   background-image: -o-linear-gradient(top, #eeeeee, white);
-  background-image: linear-gradient(to bottom, #eeeeee, white); }
+  background-image: linear-gradient(to bottom, #eeeeee, white);
+}
 
 .switch-input:checked ~ .switch-handle {
   left: 40px;
-  box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2); }
+  box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+}
 
 input {
-  outline: none; }
+  outline: none;
+}
 
 input[type=search] {
   background: #ededed url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
@@ -307,14 +394,52 @@ input[type=search] {
   -webkit-border-radius: 10em;
   -moz-border-radius: 10em;
   border-radius: 10em;
-  -webkit-transition: all .5s;
-  -moz-transition: all .5s;
-  transition: all .5s; }
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+}
 
 input[type=search]:focus {
   width: 130px;
   background-color: #fff;
   border-color: #FF00E4;
-  box-shadow: 0 0 5px #FF00E4; }
+  box-shadow: 0 0 5px #FF00E4;
+}
+
+.song {
+  border: 0.5px solid white;
+  color: white;
+  list-style: none;
+  padding: 10px;
+  font-size: 20px;
+  font-family: sans-serif;
+  transition: 0.5s;
+  border-left: none;
+  border-right: none;
+  position: relative;
+  line-height: 35px;
+}
+.song:hover {
+  border: 1px solid #ff00e4;
+  transition: 0.5s;
+  padding: 20px 10px;
+}
+
+.star {
+  width: 25px;
+  height: 25px;
+  background-size: container;
+  background-repeat: no-repeat;
+  border: none;
+  float: right;
+}
+
+.starDefault {
+  background-image: url(../img/star.svg);
+}
+
+.starActive {
+  background-image: url(../img/.starActive.svg);
+}
 
 /*# sourceMappingURL=styles.css.map */

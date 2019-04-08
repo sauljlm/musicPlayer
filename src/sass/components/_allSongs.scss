@@ -1,8 +1,15 @@
-.allSongs {
+.contallSongs {
   box-sizing: border-box;
   width: 47.5%;
-  height: 400px;
-  margin: 0 0 2% 2.5%;
+  height: 348px;
+  margin: 0 0 0 2.5%;
   float: left;
   border: 1px solid #FF00E4;
+  overflow: hidden;
+}
+
+.allsongs {
+  width: 100%;
+  padding: 0px;
+  margin: 0;
 }

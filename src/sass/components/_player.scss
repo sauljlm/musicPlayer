@@ -1,12 +1,14 @@
 audio {
   width: 40%;
-  background-color: white;
+  background-color: #FF00E4;
   -webkit-transition:all 0.5s linear;
   -moz-transition:all 0.5s linear;
   -o-transition:all 0.5s linear;
   transition:all 0.5s linear;
   box-shadow: 2px 2px 25px 2px #FF00E4;
   border-radius: none;
+  position: absolute;
+  bottom: 0;
 }
 
 audio::-webkit-media-controls-mute-button {
@@ -16,12 +18,9 @@ audio::-webkit-media-controls-mute-button {
 audio::-webkit-media-controls-play-button {
   display: none;
 }
-audio::-webkit-media-controls-toggle-closed-captions-button {
-  background-color: red;
-}
 
 audio::-webkit-media-controls-panel {
-  background-color: white;
+  background-color: #FF00E4;
 }
 
 audio::-webkit-media-controls-toggle-closed-captions-button{

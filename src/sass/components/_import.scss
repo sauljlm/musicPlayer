@@ -38,34 +38,3 @@ label, input {
   display: block;
   margin: 0 25px 25px 25px;
 }
-
-.cont__form-nav {
-  text-align: center;
-}
-
-.songs-header {
-  width: 95%;
-  margin: 2.5% auto 0 auto;
-  border: 1px solid #FF00E4;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  .formSort {
-    margin: 25%;
-  }
-  .cont-search {
-    margin: 1%;
-    height: 10px;
-  }
-  .delite, .edit {
-    background-repeat: no-repeat;
-    background-size: contain;
-    padding: 20px 50px;
-    border: 1px solid #FF00E4;
-    transition: 0.5s;
-    margin: 1% 2.5%;
-    &:hover {
-      box-shadow: 2px 2px 25px 2px #FF00E4;
-    }
-  }
-}
