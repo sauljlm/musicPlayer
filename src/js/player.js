@@ -64,6 +64,13 @@ const Player = (function () {
         const star = document.createElement('button');
         star.setAttribute('class','star starDefault');
 
+        row.addEventListener('click', ()=> {
+          this._audio.setAttribute('src', `${this.singleton.getSong(index)}`);
+          this.singleton.setPlaying = false;
+          this.singleton.changeIco(btnPlaypase);
+          this.singleton.togglePlay();
+        });
+
         row.setAttribute('id', `${index}`);
         row.setAttribute('class', 'song clearfix');
         row.innerHTML = `${song.title}`;
@@ -88,7 +95,7 @@ const Player = (function () {
     }
 
     audio() {
-      const audio = document.createElement('audio');
+      const audio = new Audio();
       audio.setAttribute('src', `${this.singleton.getSong()}`);
       // audio.setAttribute('src', 'https://github.com/sauljlm/songs/blob/master/Adan%20y%20Eva.mp3');
       audio.setAttribute('controls', '');

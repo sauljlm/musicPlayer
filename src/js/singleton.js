@@ -1,6 +1,5 @@
 const Singleton = (function () {
     let playing = 0;
-    const SONGS_URL = 'songs';
 
     let instance = null;
     let songs = [
@@ -92,6 +91,11 @@ const Singleton = (function () {
           return playList;
         }
 
+        set setPlaying(value) {
+          this.playing = value;
+          //console.log(playing);
+        }
+
         setCover() {
           document.body.style.backgroundImage = `url(../img/${songs[playing].cover})`;
           this.contCover.style.backgroundImage = `url(../img/${songs[playing].cover})`;
@@ -100,10 +104,13 @@ const Singleton = (function () {
         /**
          * Load the song
          */
-        getSong () {
+        getSong (index) {
           this.setCover();
-          // console.log(this.songsDATA);
-          return `${SONGS_URL}/${songs[playing].linkAudio}`;
+          if (index) {
+            return `songs/${songs[index].linkAudio}`;
+          } else {
+            return `songs/${songs[playing].linkAudio}`;
+          }
         }
 
         /**
