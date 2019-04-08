@@ -7,6 +7,7 @@ const Player = (function () {
       this.contAllSongs = document.querySelector('#allSongs');
       this.contPlayList = document.querySelector('#playList');
       this.contCover = document.querySelector('.js-cover');
+      this.btnPlaypase = null;
       this._audio = null;
       this.singleton = singleton;
       this.compose();
@@ -24,6 +25,7 @@ const Player = (function () {
         this.singleton.changeIco(btnPlaypase);
         this.singleton.togglePlay();
       });
+      this.btnPlaypase = btnPlaypase;
       btnBack.addEventListener('click', () => {
         this.singleton.back();
       });
@@ -66,8 +68,9 @@ const Player = (function () {
 
         row.addEventListener('click', ()=> {
           this._audio.setAttribute('src', `${this.singleton.getSong(index)}`);
+          this.singleton.setCover(index);
           this.singleton.setPlaying = false;
-          this.singleton.changeIco(btnPlaypase);
+          this.singleton.changeIco(this.btnPlaypase);
           this.singleton.togglePlay();
         });
 

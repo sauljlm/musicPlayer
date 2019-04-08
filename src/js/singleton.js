@@ -96,9 +96,9 @@ const Singleton = (function () {
           //console.log(playing);
         }
 
-        setCover() {
-          document.body.style.backgroundImage = `url(../img/${songs[playing].cover})`;
-          this.contCover.style.backgroundImage = `url(../img/${songs[playing].cover})`;
+        setCover(index = playing) {
+          document.body.style.backgroundImage = `url(../img/${songs[index].cover})`;
+          this.contCover.style.backgroundImage = `url(../img/${songs[index].cover})`;
         }
 
         /**
@@ -119,6 +119,7 @@ const Singleton = (function () {
         play () {
             this._audio.play();
             this.playing = true;
+            console.log(playing);
         }
 
         /**
