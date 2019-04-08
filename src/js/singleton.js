@@ -33,7 +33,7 @@ const Singleton = (function () {
         title: "gansta's parade",
         artist: "Coolio",
         cover: "../img/ganstaCover.jpg",
-        linkAudio: "gansta's_parade.mp3",
+        linkAudio: "gansta's_paradice.mp3",
         year: "1995",
         start: false
       },
@@ -77,11 +77,7 @@ const Singleton = (function () {
          * Load the song
          */
         getSong () {
-            let index = null;
-            if(!playing) index = 0;
-            playing = index;
-
-            return `${SONGS_URL}/${songs[index].linkAudio}`;
+            return `${SONGS_URL}/${songs[playing].linkAudio}`;
         }
 
         /**
@@ -100,22 +96,60 @@ const Singleton = (function () {
             this.playing = false;
         }
 
+        next () {
+          if (playing >= songs.length - 1) {
+            playing = 0;
+          } else {
+            playing += 1;
+          }
+          this._audio.setAttribute('src', `${this.getSong()}`);
+          if(this.playing === true) {
+            this.playing = true;
+            this.play();
+          } else {
+            this.playing = false;
+            this.pause();
+          }
+        }
+
         back () {
+          if (playing === 0) {
+            playing = songs.length - 1;
+          } else {
+            playing -= 1;
+          }
+          this._audio.setAttribute('src', `${this.getSong()}`);
+          if(this.playing === true) {
+            this.playing = true;
+            this.play();
+          } else {
+            this.playing = false;
+            this.pause();
+          }
         }
 
         /**
          * toggle play/pause
          */
         togglePlay () {
-            if(this.playing) this.pause();
-            else this.play();
+            if(this.playing) {
+              this.pause();
+            } else {
+              this.play();
+            }
+            console.log(this.playing);
+            // this.changeIco();
         }
 
-        /**
-         * repeat automatically
-         */
-        ended () {
-            if(this.repeat) this.play();
+
+        changeIco(btnPlaypase) {
+          if(this.playing) {
+            btnPlaypase.classList.add('btn-play');
+            btnPlaypase.classList.remove('btn-pause');
+          } else {
+            btnPlaypase.classList.remove('btn-play');
+            btnPlaypase.classList.add('btn-pause');
+          }
         }
     }
 })();

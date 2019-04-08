@@ -16,11 +16,16 @@ const Player = (function () {
       const btnNext = this.btn('class', 'btn-next');
 
       btnPlaypase.addEventListener('click', () => {
+        this.singleton.changeIco(btnPlaypase);
         this.singleton.togglePlay();
       });
 
       btnBack.addEventListener('click', () => {
         this.singleton.back();
+      });
+
+      btnNext.addEventListener('click', () => {
+        this.singleton.next();
       });
 
       this.container.appendChild(this._audio);
@@ -29,16 +34,18 @@ const Player = (function () {
       this.contNav.appendChild(btnNext);
 
       this.singleton.audio = this._audio;
-      // console.log(this.singleton.cancion);
     }
 
     audio() {
       const audio = document.createElement('audio');
       audio.setAttribute('src', `${this.singleton.getSong()}`);
       // audio.setAttribute('src', 'https://github.com/sauljlm/songs/blob/master/Adan%20y%20Eva.mp3');
-      
       audio.setAttribute('controls', '');
       audio.setAttribute('class', 'clearfix');
+
+      audio.addEventListener('ended', ()=> {
+        this.singleton.next();
+      });
       return audio;
     }
 
