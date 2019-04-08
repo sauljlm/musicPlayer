@@ -1,6 +1,6 @@
 const Singleton = (function () {
     let playing = 0;
-    const SONGS_URL = '../songs';
+    const SONGS_URL = 'songs';
 
     // const PREFIX = 'song_data';
     let instance = null;
