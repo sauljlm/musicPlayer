@@ -45,15 +45,25 @@ const Player = (function () {
 
     allSongs() {
       const container = document.createElement('ul');
-      container.setAttribute('class', 'allsongs dragable');
+      container.setAttribute('class', 'allsongs draggable');
+      container.setAttribute('id', 'div1');
+
+      container.addEventListener('drop', this.drop);
+      container.addEventListener('dragover', this.dragover);
+
       this.composeList(container);
-      
+
       return container;
     }
 
     playList() {
       const container = document.createElement('ul');
-      container.setAttribute('class', 'playList dragable');
+      container.setAttribute('class', 'playList draggable');
+      container.setAttribute('id', 'div2');
+      
+      container.addEventListener('drop', this.drop);
+      container.addEventListener('dragover', this.dragover);
+
       this.composePlayList(container);
       
       return container;
@@ -64,19 +74,23 @@ const Player = (function () {
       songs.forEach((song, index) => {
         const row = document.createElement('li');
         const star = document.createElement('button');
-        star.setAttribute('class','star starDefault');
+        star.setAttribute('class', 'star starDefault');
 
-        row.addEventListener('click', ()=> {
+        row.addEventListener('click', () => {
           this._audio.setAttribute('src', `${this.singleton.getSong(index)}`);
           this.singleton.setCover(index);
           this.singleton.setPlaying = false;
           this.singleton.changeIco(this.btnPlaypase);
           this.singleton.togglePlay();
         });
-
+        
         row.setAttribute('id', `${index}`);
         row.setAttribute('class', 'song clearfix');
+        row.draggable = true;
         row.innerHTML = `${song.title}`;
+        
+        row.addEventListener('dragstart', this.drag);
+
         row.appendChild(star);
         container.appendChild(row);
       });
@@ -112,14 +126,13 @@ const Player = (function () {
 
     btn(type = 'class', value) {
       const btn = document.createElement('button');
-      if (!type && value) { 
+      if (!type && value) {
         throw new Error(`Invalid class value is not a HTMLbtnElement: ${type} / ${value}`);
       } else {
         btn.setAttribute(`${type}`, `btn ${value}`);
       }
       return btn;
     }
-
     /**
      * Disable a button
      * @param {HTMLButtonElement} button
@@ -137,11 +150,48 @@ const Player = (function () {
      * @param {HTMLButtonElement} button
      */
     static enableButton (button) {
-        if(!(button instanceof HTMLButtonElement))
-            throw new Error(`Invalid button is not a HTMLButtonElement: ${button}`);
-
-        button.removeAttribute('disabled');
-        button.classList.remove('disabled');
+      if (!(button instanceof HTMLButtonElement)) {
+        throw new Error(`Invalid button is not a HTMLButtonElement: ${button}`);
+      }
+      button.removeAttribute('disabled');
+      button.classList.remove('disabled');
     }
+
+    /*
+    drag(event) {
+      let id = event.target.getAttribute('id');
+      event.dataTransfer.setData('text', id);
+    }
+
+    drop(event) {
+      event.preventDefault();
+      let id = this.getAttribute('id');
+      let item = document.querySelector(`[id = "${id}"]`);
+      let data = event.dataTransfer.getData("text", id);
+      //console.log(data);
+
+      //this.add();
+      
+      //let clone = item.cloneNode(true);
+      //clone.draggable = true;
+      //clone.addEventListener('dragstart', this.drag);
+
+      //item.appendChild(document.getElementById(data));
+      //item.parentNode.removeChild(item);
+    }
+
+    dragover(event) {
+      event.preventDefault();
+    }
+
+    add() {
+      
+      const songs = this.singleton.songsDATA;
+      songs.forEach((song) => {
+        console.log(song);
+      });
+      
+    }
+    */
   };
 }());

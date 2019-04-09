@@ -6,7 +6,7 @@
 .column-left {
   box-sizing: border-box;
   width: 50%;
-  height: 400px;
+  height: 300px;
   float: left;
   border: 1px solid #FF00E4;
   padding: 2%;
@@ -15,7 +15,7 @@
 .column-right {
   box-sizing: border-box;
   width:50%;
-  height: 400px;
+  height: 300px;
   float: left;
   border: 1px solid #FF00E4;
   padding: 2%;
@@ -24,6 +24,7 @@
 .form-import {
   border: 1px solid #FF00E4;
   margin: 2.5% 0;
+  height: 300px;
   h3 {
     color: white;
   }

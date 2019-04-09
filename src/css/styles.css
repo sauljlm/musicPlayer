@@ -10,6 +10,10 @@ body {
   clear: both;
 }
 
+.show {
+  display: block;
+}
+
 .hidde {
   display: none;
 }
@@ -108,7 +112,7 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
 .column-left {
   box-sizing: border-box;
   width: 50%;
-  height: 400px;
+  height: 300px;
   float: left;
   border: 1px solid #FF00E4;
   padding: 2%;
@@ -117,7 +121,7 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
 .column-right {
   box-sizing: border-box;
   width: 50%;
-  height: 400px;
+  height: 300px;
   float: left;
   border: 1px solid #FF00E4;
   padding: 2%;
@@ -126,6 +130,7 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
 .form-import {
   border: 1px solid #FF00E4;
   margin: 2.5% 0;
+  height: 300px;
 }
 .form-import h3 {
   color: white;
