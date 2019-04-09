@@ -9,7 +9,7 @@ const Player = (function () {
       this.contCover = document.querySelector('.js-cover');
       this.btnPlaypase = null;
       this._audio = null;
-      this.singleton = singleton;
+      this.singleton = new Singleton();
       this.compose();
     }
 

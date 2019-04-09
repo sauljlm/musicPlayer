@@ -1,13 +1,14 @@
 (function () {
   const singleton = new Singleton();
-  const importSong = new Import();
+
   const btnSongs = document.querySelector('#songs');
   const btnImport = document.querySelector('#import');
   const contSongs = document.querySelector('.js-songs');
   const contImport = document.querySelector('.js-import');
   
   function init() {
-    const player = new Player('.cont-audio', singleton);
+    const player = new Player('.cont-audio');
+    const importFunctions = new ImportFunctions();
   }
 
   btnImport.addEventListener('click', () => {

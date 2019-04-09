@@ -1,11 +1,9 @@
 const Import = (function () {
-  return class {
+  return class Import {
     constructor () {
       this.container = document.querySelector('.js-import');
       this.state = false;
       this.FORM = null;
-      this.render();
-      console.log(this.FORM);
     }
 
     render() {
@@ -38,7 +36,7 @@ const Import = (function () {
       container.appendChild(this.input('text', 'artist', ' ', 'true'));
 
       container.appendChild(this.label('year',{type: 'for', value: 'year'}));
-      container.appendChild(this.input('date', 'year', ' ', 'true'));
+      container.appendChild(this.input('number', 'year', ' ', 'true'));
 
       container.appendChild(this.label('album',{type: 'for', value: 'album'}));
       container.appendChild(this.input('text', 'album', ' ', 'true'));
@@ -60,7 +58,7 @@ const Import = (function () {
       container.appendChild(this.input('text', 'mp3', ' ', 'false'));
 
       container.appendChild(this.label('waw',{type: 'for', value: 'waw'}));
-      container.appendChild(this.input('date', 'waw', ' ', 'false'));
+      container.appendChild(this.input('text', 'waw', ' ', 'false'));
 
       container.appendChild(this.label('ogg',{type: 'for', value: 'ogg'}));
       container.appendChild(this.input('text', 'ogg', ' ', 'false'));
@@ -73,7 +71,10 @@ const Import = (function () {
       const nav = this.div({type: 'class', value: 'form__nav'});
 
       const btnSave = this.btnInput('save','save','form-btn', 'submit');
-      const btnReset = this.btnInput('reset','reset','form-btn', 'submit');
+      const btnReset = this.btnInput('reset','reset','form-btn', 'reset');
+
+      btnSave.addEventListener('click', ImportFunctions.valueImport);
+
 
       container.appendChild(btnReset);
       container.appendChild(btnSave);
