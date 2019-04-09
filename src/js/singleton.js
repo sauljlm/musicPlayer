@@ -7,7 +7,7 @@ const Singleton = (function () {
       title: 'rockstar',
       artist: 'Post Malone',
       cover: 'rockstarCover.jpg',
-      linkAudio: 'rockstar.mp3',
+      linkAudio: 'https://sauljlm.github.io/songs/rockstar.mp3',
       year: '2016',
       started: false,
     },
@@ -15,7 +15,7 @@ const Singleton = (function () {
       title: 'Adan y Eva',
       artist: 'Paulo Londra',
       cover: 'adanYevaCover.jpg',
-      linkAudio: 'Adan_y_Eva.mp3',
+      linkAudio: 'https://sauljlm.github.io/songs/Adan%20y%20Eva.mp3',
       year: '2019',
       started: false,
     },
@@ -23,7 +23,7 @@ const Singleton = (function () {
       title: 'believer',
       artist: 'Imagine Dragons',
       cover: 'believerCover.jpg',
-      linkAudio: 'Believer.mp3',
+      linkAudio: 'https://sauljlm.github.io/songs/Believer.mp3',
       year: '2017',
       started: false,
     },
@@ -31,7 +31,7 @@ const Singleton = (function () {
       title: 'ganstas paradice',
       artist: 'Coolio',
       cover: 'ganstaCover.jpg',
-      linkAudio: "gansta's_paradice.mp3",
+      linkAudio: "https://sauljlm.github.io/songs/gansta's%20paradice.mp3",
       year: '1995',
       started: false,
     },
@@ -39,7 +39,7 @@ const Singleton = (function () {
       title: 'Panda',
       artist: 'Desiigner',
       cover: 'pandaCover.jpg',
-      linkAudio: 'panda.mp3',
+      linkAudio: 'https://sauljlm.github.io/songs/panda.mp3',
       year: '2015',
       started: false,
     },
@@ -47,7 +47,7 @@ const Singleton = (function () {
       title: 'Without Me',
       artist: 'Halsey',
       cover: 'withoutMeCover.jpg',
-      linkAudio: 'Without_Me.mp3',
+      linkAudio: 'https://sauljlm.github.io/songs/Without%20Me.mp3',
       year: '2018',
       started: false,
     },
@@ -110,9 +110,9 @@ const Singleton = (function () {
     getSong(index) {
       this.setCover();
       if (index) {
-        return `songs/${songs[index].linkAudio}`;
+        return `${songs[index].linkAudio}`;
       }
-      return `songs/${songs[playing].linkAudio}`;
+      return `${songs[playing].linkAudio}`;
     }
 
     /**
