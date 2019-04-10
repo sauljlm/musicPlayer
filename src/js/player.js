@@ -73,19 +73,12 @@ const Player = (function () {
       const songs = this.singleton.songsDATA;
       this.clear(container);
       songs.forEach((song, index) => {
+        // console.log(songs[index].dataSong);
         const row = document.createElement('li');
         const star = document.createElement('button');
         star.setAttribute('class', 'star starDefault');
-
-        row.addEventListener('click', () => {
-          this.AUDIO.setAttribute('src', `${this.singleton.getSong(index)}`);
-          this.singleton.setPlaying = false;
-          this.singleton.changeIco(this.btnPlaypase);
-          this.singleton.togglePlay();
-          this.singleton.setCover(index);
-        });
-
         row.setAttribute('id', `${index}`);
+        row.setAttribute('dataSong', `${songs[index].dataSong}`);
         row.setAttribute('class', 'song clearfix');
         row.setAttribute('draggable', 'true');
         row.setAttribute('ondragstart', 'event.dataTransfer.setData("text/plain",null)');
@@ -110,14 +103,11 @@ const Player = (function () {
         star.setAttribute('class', 'star starDefault');
 
         row.addEventListener('click', () => {
-          this.AUDIO.setAttribute('src', `${this.singleton.getSong(index)}`);
-          this.singleton.setPlaying = false;
-          this.singleton.changeIco(this.btnPlaypase);
-          this.singleton.togglePlay();
-          this.singleton.setCover(index);
+          singleton.initSong(index);
         });
 
         row.setAttribute('id', `${index}`);
+        row.setAttribute('dataSong', `${songs[index].dataSong}`);
         row.setAttribute('class', 'song clearfix');
         row.setAttribute('draggable', 'true');
 
@@ -185,26 +175,39 @@ const Player = (function () {
 
       document.addEventListener('drop', function drop(event) {
         const id = this.dragged.getAttribute('id');
+        const dataSong = this.dragged.getAttribute('dataSong');
         const songs = singleton.songsDATA;
         const playList = singleton.playListDATA;
 
+        // console.log(songs);
+        // console.log(playList);
+
         if (event.target.className === 'playList') {
-          console.log('playList');
           singleton.setPlayList = songs[id];
-          songs.splice(id, 1);
 
           player.composePlayList();
+          songs.splice(id, 1);
           player.composeList();
+          playList.forEach((element, index) => {
+            if (element.dataSong === dataSong) {
+              singleton.initSong(index);
+            }
+          });
         }
 
         if (event.target.className === 'allsongs') {
-          console.log('List');
           singleton.setlist = playList[id];
-          playList.splice(id, 1);
-          console.log(id);
 
+          playList.splice(id, 1);
           player.composePlayList();
           player.composeList();
+          /*
+          songs.forEach(element => {
+            if (element.dataSong === dataSong) {
+              console.log(element);
+            }
+          });
+          */
         }
       });
     }

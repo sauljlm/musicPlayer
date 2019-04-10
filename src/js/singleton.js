@@ -1,6 +1,5 @@
 const Singleton = (function () {
   let playing = 0;
-
   let instance = null;
   let songs = [
     {
@@ -11,6 +10,7 @@ const Singleton = (function () {
       linkAudio: 'https://sauljlm.github.io/songs/rockstar.mp3',
       year: '2016',
       started: false,
+      dataSong: 'rockstar',
     },
     {
       title: 'Adan y Eva',
@@ -20,6 +20,7 @@ const Singleton = (function () {
       linkAudio: 'https://sauljlm.github.io/songs/Adan%20y%20Eva.mp3',
       year: '2019',
       started: false,
+      dataSong: 'Adan y Eva',
     },
     {
       title: 'believer',
@@ -29,6 +30,7 @@ const Singleton = (function () {
       linkAudio: 'https://sauljlm.github.io/songs/Believer.mp3',
       year: '2017',
       started: false,
+      dataSong: 'believer',
     },
     {
       title: "gangsta's paradise",
@@ -38,6 +40,7 @@ const Singleton = (function () {
       linkAudio: "https://sauljlm.github.io/songs/gansta's%20paradice.mp3",
       year: '1995',
       started: false,
+      dataSong: "gangsta's paradise",
     },
     {
       title: 'Panda',
@@ -47,6 +50,7 @@ const Singleton = (function () {
       linkAudio: 'https://sauljlm.github.io/songs/panda.mp3',
       year: '2015',
       started: false,
+      dataSong: 'Panda',
     },
     {
       title: 'Without Me',
@@ -56,13 +60,14 @@ const Singleton = (function () {
       linkAudio: 'https://sauljlm.github.io/songs/Without%20Me.mp3',
       year: '2018',
       started: false,
+      dataSong: 'Without Me',
     },
   ];
   let playList = [];
 
   return class Singleton {
     constructor() {
-      this._audio = null;
+      this.AUDIO = null;
       this.playing = false;
       this.cover = null;
       this.contCover = document.querySelector('.js-cover');
@@ -76,7 +81,7 @@ const Singleton = (function () {
       if (!data) {
         throw new Error(`Invalid set audio is not a HTMLaudioElement: ${data}`);
       }
-      this._audio = data;
+      this.AUDIO = data;
     }
 
     /**
@@ -114,6 +119,7 @@ const Singleton = (function () {
      *  @param {number} value
      */
     set setPlaying(value) {
+      console.log(value);
       this.playing = value;
     }
 
@@ -122,8 +128,8 @@ const Singleton = (function () {
         document.body.style.backgroundImage = "url('img/default.jpg')";
         this.contCover.style.backgroundImage = "url('img/default.jpg')";
       } else {
-        document.body.style.backgroundImage = `url(img/${songs[index].cover})`;
-        this.contCover.style.backgroundImage = `url(img/${songs[index].cover})`;
+        document.body.style.backgroundImage = `url(img/${playList[index].cover})`;
+        this.contCover.style.backgroundImage = `url(img/${playList[index].cover})`;
       }
     }
 
@@ -133,17 +139,26 @@ const Singleton = (function () {
      */
     getSong(index) {
       this.setCover();
+
       if (index) {
-        return `${songs[index].linkAudio}`;
+        return `${playList[index].linkAudio}`;
       }
-      return `${songs[playing].linkAudio}`;
+      return `${playList[playing].linkAudio}`;
+    }
+
+    initSong(dataSong) {
+      this.AUDIO.setAttribute('src', `${this.getSong(dataSong)}`);
+      this.setPlaying = false;
+      this.togglePlay();
+      // this.changeIco();
+      this.setCover(dataSong);
     }
 
     /**
      * play the audio
      */
     play() {
-      this._audio.play();
+      this.AUDIO.play();
       this.playing = true;
     }
 
@@ -151,7 +166,7 @@ const Singleton = (function () {
      * pause the audio
      */
     pause() {
-      this._audio.pause();
+      this.AUDIO.pause();
       this.playing = false;
     }
 
@@ -161,7 +176,7 @@ const Singleton = (function () {
       } else {
         playing += 1;
       }
-      this._audio.setAttribute('src', `${this.getSong()}`);
+      this.AUDIO.setAttribute('src', `${this.getSong()}`);
       if (this.playing === true) {
         this.playing = true;
         this.play();
@@ -177,7 +192,7 @@ const Singleton = (function () {
       } else {
         playing -= 1;
       }
-      this._audio.setAttribute('src', `${this.getSong()}`);
+      this.AUDIO.setAttribute('src', `${this.getSong()}`);
       if (this.playing === true) {
         this.playing = true;
         this.play();
@@ -203,9 +218,6 @@ const Singleton = (function () {
      * @param {HTMLButtonElement} button
      */
     changeIco(btnPlaypase) {
-      if (!btnPlaypase) {
-        throw new Error(`Invalid btn is not a HTMLbtnElement: ${btnPlaypase}`);
-      }
       if (this.playing) {
         btnPlaypase.classList.add('btn-play');
         btnPlaypase.classList.remove('btn-pause');
