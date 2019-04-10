@@ -7,16 +7,18 @@ const Player = (function () {
       this.contAllSongs = document.querySelector('#allSongs');
       this.contPlayList = document.querySelector('#playList');
       this.contCover = document.querySelector('.js-cover');
+      this.ulPlayList = null;
+      this.ulList = null;
       this.dragged = null;
       this.btnPlaypase = null;
-      this._audio = null;
+      this.AUDIO = null;
       this.singleton = new Singleton();
       this.compose();
       this.dragAndDrop();
     }
 
     compose() {
-      this._audio = this.audio();
+      this.AUDIO = this.audio();
       const btnPlaypase = this.btn('class', 'btn-play');
       const btnBack = this.btn('class', 'btn-back');
       const btnNext = this.btn('class', 'btn-next');
@@ -35,14 +37,14 @@ const Player = (function () {
         this.singleton.next();
       });
 
-      this.contAudio.appendChild(this._audio);
+      this.contAudio.appendChild(this.AUDIO);
       this.contNav.appendChild(btnBack);
       this.contNav.appendChild(btnPlaypase);
       this.contNav.appendChild(btnNext);
       this.contAllSongs.appendChild(allSongs);
       this.contPlayList.appendChild(playList);
 
-      this.singleton.audio = this._audio;
+      this.singleton.audio = this.AUDIO;
     }
 
     allSongs() {
@@ -50,6 +52,7 @@ const Player = (function () {
       container.setAttribute('class', 'allsongs');
       container.setAttribute('id', 'div1');
 
+      this.ulList = container;
       this.composeList(container);
 
       return container;
@@ -60,24 +63,26 @@ const Player = (function () {
       container.setAttribute('class', 'playList');
       container.setAttribute('id', 'div2');
 
+      this.ulPlayList = container;
       this.composePlayList(container);
 
       return container;
     }
 
-    composeList(container) {
+    composeList(container = this.ulList) {
       const songs = this.singleton.songsDATA;
+      this.clear(container);
       songs.forEach((song, index) => {
         const row = document.createElement('li');
         const star = document.createElement('button');
         star.setAttribute('class', 'star starDefault');
 
         row.addEventListener('click', () => {
-          this._audio.setAttribute('src', `${this.singleton.getSong(index)}`);
-          this.singleton.setCover(index);
+          this.AUDIO.setAttribute('src', `${this.singleton.getSong(index)}`);
           this.singleton.setPlaying = false;
           this.singleton.changeIco(this.btnPlaypase);
           this.singleton.togglePlay();
+          this.singleton.setCover(index);
         });
 
         row.setAttribute('id', `${index}`);
@@ -92,16 +97,32 @@ const Player = (function () {
       });
     }
 
-    composePlayList(container) {
+    clear(container) {
+      container.innerHTML = '';
+    }
+
+    composePlayList(container = this.ulPlayList) {
       const songs = this.singleton.playListDATA;
+      this.clear(container);
       songs.forEach((song, index) => {
         const row = document.createElement('li');
         const star = document.createElement('button');
-        star.setAttribute('class','star starDefault');
+        star.setAttribute('class', 'star starDefault');
+
+        row.addEventListener('click', () => {
+          this.AUDIO.setAttribute('src', `${this.singleton.getSong(index)}`);
+          this.singleton.setPlaying = false;
+          this.singleton.changeIco(this.btnPlaypase);
+          this.singleton.togglePlay();
+          this.singleton.setCover(index);
+        });
 
         row.setAttribute('id', `${index}`);
         row.setAttribute('class', 'song clearfix');
+        row.setAttribute('draggable', 'true');
+
         row.innerHTML = `${song.title}`;
+
         row.appendChild(star);
         container.appendChild(row);
       });
@@ -109,14 +130,14 @@ const Player = (function () {
 
     audio() {
       const audio = new Audio();
-      audio.setAttribute('src', `${this.singleton.getSong()}`);
-      // audio.setAttribute('src', 'https://github.com/sauljlm/songs/blob/master/Adan%20y%20Eva.mp3');
       audio.setAttribute('controls', '');
       audio.setAttribute('class', 'clearfix');
 
-      audio.addEventListener('ended', ()=> {
+      audio.addEventListener('ended', () => {
         this.singleton.next();
       });
+
+      this.singleton.setCover();
       return audio;
     }
 
@@ -133,7 +154,7 @@ const Player = (function () {
      * Disable a button
      * @param {HTMLButtonElement} button
      */
-    static disableButton (button) {
+    disableButton (button) {
       if(!(button instanceof HTMLButtonElement))
           throw new Error(`Invalid button is not a HTMLButtonElement: ${button}`);
 
@@ -145,14 +166,14 @@ const Player = (function () {
      * Disable a button
      * @param {HTMLButtonElement} button
      */
-    static enableButton (button) {
+    enableButton(button) {
       if (!(button instanceof HTMLButtonElement)) {
         throw new Error(`Invalid button is not a HTMLButtonElement: ${button}`);
       }
       button.removeAttribute('disabled');
       button.classList.remove('disabled');
     }
-    
+
     dragAndDrop() {
       document.addEventListener('dragstart', function drag (event) {
         this.dragged = event.target;
@@ -163,15 +184,27 @@ const Player = (function () {
       });
 
       document.addEventListener('drop', function drop(event) {
-        const id = this.dragged.getAttribute("id");
-        //const songs = this.singleton.playListDATA;
-        //console.log(songs);
-        if (event.target.className === 'contPlayList clearfix') {
-          event.target.appendChild(this.dragged);
+        const id = this.dragged.getAttribute('id');
+        const songs = singleton.songsDATA;
+        const playList = singleton.playListDATA;
+
+        if (event.target.className === 'playList') {
+          console.log('playList');
+          singleton.setPlayList = songs[id];
+          songs.splice(id, 1);
+
+          player.composePlayList();
+          player.composeList();
         }
 
-        if (event.target.className === 'contallSongs clearfix') {
-          event.target.appendChild(this.dragged);
+        if (event.target.className === 'allsongs') {
+          console.log('List');
+          singleton.setlist = playList[id];
+          playList.splice(id, 1);
+          console.log(id);
+
+          player.composePlayList();
+          player.composeList();
         }
       });
     }

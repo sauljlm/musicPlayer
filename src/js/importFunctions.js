@@ -15,9 +15,21 @@ const ImportFunctions = (function () {
       this.import.render();
     }
 
-    static valueImport(e) {
+    static getForm(e) {
       e.preventDefault();
-      console.log('hola mundo');
+      const name = document.querySelector('#name').value;
+      this.name = this.validate(name);
+      console.log(this.name);
     }
+
+    validate(value) {
+      if(!value) { 
+        return false
+      } else {
+        return value
+      }
+    }
+
+
   }
 }());

@@ -1,13 +1,15 @@
+const singleton = new Singleton();
+const player = new Player('.cont-audio');
+
 (function () {
-  const singleton = new Singleton();
 
   const btnSongs = document.querySelector('#songs');
   const btnImport = document.querySelector('#import');
   const contSongs = document.querySelector('.js-songs');
   const contImport = document.querySelector('.js-import');
-  
+
   function init() {
-    const player = new Player('.cont-audio');
+    // const player = new Player('.cont-audio');
     const importFunctions = new ImportFunctions();
   }
 

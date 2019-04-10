@@ -6,6 +6,7 @@ const Singleton = (function () {
     {
       title: 'rockstar',
       artist: 'Post Malone',
+      album: 'Beerbongs & Bentleys',
       cover: 'rockstarCover.jpg',
       linkAudio: 'https://sauljlm.github.io/songs/rockstar.mp3',
       year: '2016',
@@ -14,6 +15,7 @@ const Singleton = (function () {
     {
       title: 'Adan y Eva',
       artist: 'Paulo Londra',
+      album: "Hit's Spring! 2019",
       cover: 'adanYevaCover.jpg',
       linkAudio: 'https://sauljlm.github.io/songs/Adan%20y%20Eva.mp3',
       year: '2019',
@@ -22,14 +24,16 @@ const Singleton = (function () {
     {
       title: 'believer',
       artist: 'Imagine Dragons',
+      album: 'Evolve',
       cover: 'believerCover.jpg',
       linkAudio: 'https://sauljlm.github.io/songs/Believer.mp3',
       year: '2017',
       started: false,
     },
     {
-      title: 'ganstas paradice',
+      title: "gangsta's paradise",
       artist: 'Coolio',
+      album: "Gangsta's Paradise",
       cover: 'ganstaCover.jpg',
       linkAudio: "https://sauljlm.github.io/songs/gansta's%20paradice.mp3",
       year: '1995',
@@ -38,6 +42,7 @@ const Singleton = (function () {
     {
       title: 'Panda',
       artist: 'Desiigner',
+      album: 'Panda',
       cover: 'pandaCover.jpg',
       linkAudio: 'https://sauljlm.github.io/songs/panda.mp3',
       year: '2015',
@@ -46,6 +51,7 @@ const Singleton = (function () {
     {
       title: 'Without Me',
       artist: 'Halsey',
+      album: 'Eastside',
       cover: 'withoutMeCover.jpg',
       linkAudio: 'https://sauljlm.github.io/songs/Without%20Me.mp3',
       year: '2018',
@@ -87,25 +93,43 @@ const Singleton = (function () {
       return playList;
     }
 
+    /**
+     * push playlist
+     *  @param {object} value
+     */
     set setPlayList (value) {
       playList.push(value);
     }
 
+      /**
+     * push list
+     *  @param {object} value
+     */
+    set setlist (value) {
+      songs.push(value);
+    }
+
+    /**
+     * set playing
+     *  @param {number} value
+     */
     set setPlaying(value) {
       this.playing = value;
     }
 
     setCover(index = playing) {
       if (this.playing === false) {
-        document.body.style.backgroundImage = `url(../img/default.jpg})`;
-        this.contCover.style.backgroundImage = `url(../img/default.jpg})`;
+        document.body.style.backgroundImage = "url('img/default.jpg')";
+        this.contCover.style.backgroundImage = "url('img/default.jpg')";
+      } else {
+        document.body.style.backgroundImage = `url(img/${songs[index].cover})`;
+        this.contCover.style.backgroundImage = `url(img/${songs[index].cover})`;
       }
-      document.body.style.backgroundImage = `url(../img/${songs[index].cover})`;
-      this.contCover.style.backgroundImage = `url(../img/${songs[index].cover})`;
     }
 
     /**
      * Load the song
+     *  @param {number} index
      */
     getSong(index) {
       this.setCover();
@@ -174,6 +198,10 @@ const Singleton = (function () {
       }
     }
 
+    /**
+     * change icon of button
+     * @param {HTMLButtonElement} button
+     */
     changeIco(btnPlaypase) {
       if (!btnPlaypase) {
         throw new Error(`Invalid btn is not a HTMLbtnElement: ${btnPlaypase}`);

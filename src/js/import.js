@@ -73,7 +73,7 @@ const Import = (function () {
       const btnSave = this.btnInput('save','save','form-btn', 'submit');
       const btnReset = this.btnInput('reset','reset','form-btn', 'reset');
 
-      btnSave.addEventListener('click', ImportFunctions.valueImport);
+      btnSave.addEventListener('click', ImportFunctions.getForm);
 
 
       container.appendChild(btnReset);
@@ -88,7 +88,6 @@ const Import = (function () {
       input.setAttribute('id', `${id}`);
       input.setAttribute('class', `${className}`);
       input.setAttribute('type', `${type}`);
-
       return input;
     }
 
@@ -106,7 +105,7 @@ const Import = (function () {
       const input = document.createElement('input');
       input.setAttribute('type', `${type}`);
       input.setAttribute('name', `${name}`);
-      input.setAttribute('id', `${type}`);
+      input.setAttribute('id', `${name}`);
       input.setAttribute('value', `${value}`);
 
       if(required) {
