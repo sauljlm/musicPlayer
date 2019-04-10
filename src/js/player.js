@@ -1,16 +1,18 @@
 const Player = (function () {
 
   return class Player {
-    constructor(contAudio, singleton) {
+    constructor(contAudio) {
       this.contAudio = document.querySelector(contAudio);
       this.contNav = document.querySelector('#cont-nav');
       this.contAllSongs = document.querySelector('#allSongs');
       this.contPlayList = document.querySelector('#playList');
       this.contCover = document.querySelector('.js-cover');
+      this.dragged = null;
       this.btnPlaypase = null;
       this._audio = null;
       this.singleton = new Singleton();
       this.compose();
+      this.dragAndDrop();
     }
 
     compose() {
@@ -45,11 +47,8 @@ const Player = (function () {
 
     allSongs() {
       const container = document.createElement('ul');
-      container.setAttribute('class', 'allsongs draggable');
+      container.setAttribute('class', 'allsongs');
       container.setAttribute('id', 'div1');
-
-      container.addEventListener('drop', this.drop);
-      container.addEventListener('dragover', this.dragover);
 
       this.composeList(container);
 
@@ -58,14 +57,11 @@ const Player = (function () {
 
     playList() {
       const container = document.createElement('ul');
-      container.setAttribute('class', 'playList draggable');
+      container.setAttribute('class', 'playList');
       container.setAttribute('id', 'div2');
-      
-      container.addEventListener('drop', this.drop);
-      container.addEventListener('dragover', this.dragover);
 
       this.composePlayList(container);
-      
+
       return container;
     }
 
@@ -83,13 +79,13 @@ const Player = (function () {
           this.singleton.changeIco(this.btnPlaypase);
           this.singleton.togglePlay();
         });
-        
+
         row.setAttribute('id', `${index}`);
         row.setAttribute('class', 'song clearfix');
-        row.draggable = true;
+        row.setAttribute('draggable', 'true');
+        row.setAttribute('ondragstart', 'event.dataTransfer.setData("text/plain",null)');
+
         row.innerHTML = `${song.title}`;
-        
-        row.addEventListener('dragstart', this.drag);
 
         row.appendChild(star);
         container.appendChild(row);
@@ -156,42 +152,28 @@ const Player = (function () {
       button.removeAttribute('disabled');
       button.classList.remove('disabled');
     }
-
-    /*
-    drag(event) {
-      let id = event.target.getAttribute('id');
-      event.dataTransfer.setData('text', id);
-    }
-
-    drop(event) {
-      event.preventDefault();
-      let id = this.getAttribute('id');
-      let item = document.querySelector(`[id = "${id}"]`);
-      let data = event.dataTransfer.getData("text", id);
-      //console.log(data);
-
-      //this.add();
-      
-      //let clone = item.cloneNode(true);
-      //clone.draggable = true;
-      //clone.addEventListener('dragstart', this.drag);
-
-      //item.appendChild(document.getElementById(data));
-      //item.parentNode.removeChild(item);
-    }
-
-    dragover(event) {
-      event.preventDefault();
-    }
-
-    add() {
-      
-      const songs = this.singleton.songsDATA;
-      songs.forEach((song) => {
-        console.log(song);
+    
+    dragAndDrop() {
+      document.addEventListener('dragstart', function drag (event) {
+        this.dragged = event.target;
       });
-      
+
+      document.addEventListener('dragover', function dragover(event) {
+        event.preventDefault();
+      });
+
+      document.addEventListener('drop', function drop(event) {
+        const id = this.dragged.getAttribute("id");
+        //const songs = this.singleton.playListDATA;
+        //console.log(songs);
+        if (event.target.className === 'contPlayList clearfix') {
+          event.target.appendChild(this.dragged);
+        }
+
+        if (event.target.className === 'contallSongs clearfix') {
+          event.target.appendChild(this.dragged);
+        }
+      });
     }
-    */
   };
 }());
