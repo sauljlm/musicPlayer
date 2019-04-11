@@ -7,7 +7,9 @@ const Singleton = (function () {
       artist: 'Post Malone',
       album: 'Beerbongs & Bentleys',
       cover: 'rockstarCover.jpg',
-      linkAudio: 'https://sauljlm.github.io/songs/rockstar.mp3',
+      mp3: 'https://sauljlm.github.io/songs/rockstar.mp3',
+      wav: 'https://sauljlm.github.io/songs/rockstar.wav',
+      ogg: 'https://sauljlm.github.io/songs/rockstar.ogg',
       year: '2016',
       started: false,
       dataSong: 'rockstar',
@@ -17,7 +19,9 @@ const Singleton = (function () {
       artist: 'Paulo Londra',
       album: "Hit's Spring! 2019",
       cover: 'adanYevaCover.jpg',
-      linkAudio: 'https://sauljlm.github.io/songs/Adan%20y%20Eva.mp3',
+      mp3: 'https://sauljlm.github.io/songs/Adan%20y%20Eva.mp3',
+      wav: 'https://sauljlm.github.io/songs/Adan%20y%20Eva.wav',
+      ogg: 'https://sauljlm.github.io/songs/Adan%20y%20Eva.ogg',
       year: '2019',
       started: false,
       dataSong: 'Adan y Eva',
@@ -27,7 +31,9 @@ const Singleton = (function () {
       artist: 'Imagine Dragons',
       album: 'Evolve',
       cover: 'believerCover.jpg',
-      linkAudio: 'https://sauljlm.github.io/songs/Believer.mp3',
+      mp3: 'https://sauljlm.github.io/songs/Believer.mp3',
+      wav: 'https://sauljlm.github.io/songs/Believer.wav',
+      ogg: 'https://sauljlm.github.io/songs/Believer.ogg',
       year: '2017',
       started: false,
       dataSong: 'believer',
@@ -37,7 +43,9 @@ const Singleton = (function () {
       artist: 'Coolio',
       album: "Gangsta's Paradise",
       cover: 'ganstaCover.jpg',
-      linkAudio: "https://sauljlm.github.io/songs/gansta's%20paradice.mp3",
+      mp3: "https://sauljlm.github.io/songs/gansta's%20paradice.mp3",
+      wav: "https://sauljlm.github.io/songs/gansta's%20paradice.wav",
+      ogg: "https://sauljlm.github.io/songs/gansta's%20paradice.ogg",
       year: '1995',
       started: false,
       dataSong: "gangsta's paradise",
@@ -47,7 +55,9 @@ const Singleton = (function () {
       artist: 'Desiigner',
       album: 'Panda',
       cover: 'pandaCover.jpg',
-      linkAudio: 'https://sauljlm.github.io/songs/panda.mp3',
+      mp3: 'https://sauljlm.github.io/songs/panda.mp3',
+      wav: 'https://sauljlm.github.io/songs/panda.wav',
+      ogg: 'https://sauljlm.github.io/songs/panda.ogg',
       year: '2015',
       started: false,
       dataSong: 'Panda',
@@ -57,7 +67,9 @@ const Singleton = (function () {
       artist: 'Halsey',
       album: 'Eastside',
       cover: 'withoutMeCover.jpg',
-      linkAudio: 'https://sauljlm.github.io/songs/Without%20Me.mp3',
+      mp3: 'https://sauljlm.github.io/songs/Without%20Me.mp3',
+      wav: 'https://sauljlm.github.io/songs/Without%20Me.wav',
+      ogg: 'https://sauljlm.github.io/songs/Without%20Me.ogg',
       year: '2018',
       started: false,
       dataSong: 'Without Me',
@@ -119,7 +131,6 @@ const Singleton = (function () {
      *  @param {number} value
      */
     set setPlaying(value) {
-      console.log(value);
       this.playing = value;
     }
 
@@ -141,9 +152,9 @@ const Singleton = (function () {
       this.setCover();
 
       if (index) {
-        return `${playList[index].linkAudio}`;
+        return `${playList[index].mp3}`;
       }
-      return `${playList[playing].linkAudio}`;
+      return `${playList[playing].mp3}`;
     }
 
     initSong(dataSong) {

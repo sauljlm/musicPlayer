@@ -4,6 +4,8 @@ const Import = (function () {
       this.container = document.querySelector('.js-import');
       this.state = false;
       this.FORM = null;
+
+      this.render();
     }
 
     render() {
@@ -72,8 +74,8 @@ const Import = (function () {
 
       const btnSave = this.btnInput('save','save','form-btn', 'submit');
       const btnReset = this.btnInput('reset','reset','form-btn', 'reset');
-
-      btnSave.addEventListener('click', ImportFunctions.getForm);
+      
+      btnSave.addEventListener('click', this.getForm);
 
 
       container.appendChild(btnReset);

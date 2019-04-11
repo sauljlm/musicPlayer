@@ -1,5 +1,7 @@
 const Player = (function () {
 
+  const contSongs = document.querySelector('.js-songs'); 
+
   return class Player {
     constructor(contAudio) {
       this.contAudio = document.querySelector(contAudio);
@@ -24,6 +26,7 @@ const Player = (function () {
       const btnNext = this.btn('class', 'btn-next');
       const allSongs = this.allSongs();
       const playList = this.playList();
+      const navSongs = this.nav();
 
       btnPlaypase.addEventListener('click', () => {
         this.singleton.changeIco(btnPlaypase);
@@ -37,6 +40,7 @@ const Player = (function () {
         this.singleton.next();
       });
 
+      contSongs.insertBefore(navSongs, this.contAllSongs);
       this.contAudio.appendChild(this.AUDIO);
       this.contNav.appendChild(btnBack);
       this.contNav.appendChild(btnPlaypase);
@@ -45,6 +49,74 @@ const Player = (function () {
       this.contPlayList.appendChild(playList);
 
       this.singleton.audio = this.AUDIO;
+
+      this.disableButton(btnPlaypase);
+      this.disableButton(btnBack);
+      this.disableButton(btnNext);
+    }
+
+    nav() {
+      const container = document.createElement('div');
+      container.setAttribute('class', 'songs-header');
+
+      const sortBy = document.createElement('select');
+      sortBy.setAttribute('id', 'formSort');
+      const optionDefault = this.option();
+      optionDefault.setAttribute('selected','selected');
+      optionDefault.innerHTML = 'Sor By'
+      const option1 = this.option('artist');
+      const option2 = this.option('songName');
+      const option3 = this.option('year');
+      const option4 = this.option('started');
+      const option5 = this.option('album');
+
+      const btnDelite = this.btn('class','js-delite');
+      const btnEdit = this.btn('class', 'js-edit');
+      this.disableButton(btnDelite);
+      this.disableButton(btnEdit);
+      btnDelite.setAttribute('class', 'delite');
+      btnEdit.setAttribute('class', 'edit');
+      btnDelite.innerHTML = 'Delite';
+      btnEdit.innerHTML = 'Edit';
+
+      const search = this.createSearch();
+
+      sortBy.appendChild(optionDefault);
+      sortBy.appendChild(option1);
+      sortBy.appendChild(option2);
+      sortBy.appendChild(option3);
+      sortBy.appendChild(option4);
+      sortBy.appendChild(option5);
+
+      container.appendChild(sortBy);
+      container.appendChild(btnDelite);
+      container.appendChild(btnEdit);
+
+      container.appendChild(search);
+
+      return container;
+    }
+
+    option(value = ' ') {
+      const option = document.createElement('option')
+      option.setAttribute('value', `${value}`);
+      if (value) {
+        option.innerHTML = value;
+      }
+      return option;
+    }
+
+    createSearch() {
+      const form = document.createElement('form');
+      form.setAttribute('class', 'cont-search');
+
+      const input = document.createElement('input');
+      input.setAttribute('type', 'search');
+      input.setAttribute('placeholder', 'Search');
+
+      form.appendChild(input);
+
+      return form;
     }
 
     allSongs() {
@@ -73,7 +145,7 @@ const Player = (function () {
       const songs = this.singleton.songsDATA;
       this.clear(container);
       songs.forEach((song, index) => {
-        // console.log(songs[index].dataSong);
+
         const row = document.createElement('li');
         const star = document.createElement('button');
         star.setAttribute('class', 'star starDefault');
@@ -101,15 +173,14 @@ const Player = (function () {
         const row = document.createElement('li');
         const star = document.createElement('button');
         star.setAttribute('class', 'star starDefault');
-
-        row.addEventListener('click', () => {
-          singleton.initSong(index);
-        });
-
         row.setAttribute('id', `${index}`);
         row.setAttribute('dataSong', `${songs[index].dataSong}`);
         row.setAttribute('class', 'song clearfix');
         row.setAttribute('draggable', 'true');
+
+        row.addEventListener('click', () => {
+          singleton.initSong(index);
+        });
 
         row.innerHTML = `${song.title}`;
 
@@ -145,11 +216,9 @@ const Player = (function () {
      * @param {HTMLButtonElement} button
      */
     disableButton (button) {
-      if(!(button instanceof HTMLButtonElement))
-          throw new Error(`Invalid button is not a HTMLButtonElement: ${button}`);
-
+      //if(!(button instanceof HTMLButtonElement))
+      //    throw new Error(`Invalid button is not a HTMLButtonElement: ${button}`);
       button.setAttribute('disabled', '');
-      button.classList.add('disabled');
     }
 
     /**
@@ -179,9 +248,6 @@ const Player = (function () {
         const songs = singleton.songsDATA;
         const playList = singleton.playListDATA;
 
-        // console.log(songs);
-        // console.log(playList);
-
         if (event.target.className === 'playList') {
           singleton.setPlayList = songs[id];
 
@@ -201,13 +267,6 @@ const Player = (function () {
           playList.splice(id, 1);
           player.composePlayList();
           player.composeList();
-          /*
-          songs.forEach(element => {
-            if (element.dataSong === dataSong) {
-              console.log(element);
-            }
-          });
-          */
         }
       });
     }

@@ -16,28 +16,57 @@
       <button class="btn-header" id="import">import</button>
     </div>
     <div class="js-songs  songs clearfix">
-      <div class="songs-header">
-        <form>
-          <select id="formSort" class="formSort" name="order">
-            <option value="" selected disabled hidden>sort by</option>
-            <option value="artist">artist</option>
-            <option value="songName">songName</option>
-            <option value="year">year</option>
-            <option value="started">started</option>
-            <option value="album">album</option>
-          </select>
-        </form>
-        <button class="delite js-delite">delite</button>
-        <button class="edit ja-delite">edit</button>
-        <form class="cont-search">
-          <input type="search" placeholder="Search">
-        </form>
-      </div>
+      
       <div id="allSongs" class="contallSongs">
       </div>
       <div id="playList" class="contPlayList"></div>
     </div>
-    <div class="js-import hidde import clearfix"></div>
+    <div class="js-import hidde import clearfix">
+      <h3 class="formTitle js-formTitle">Import Songs</h3>
+      <form class="form-import">
+        <div class="column column-left">
+          <label for="Name">Name</label>
+          <input type="text" name="Name" id="name" value='' required>
+
+          <label for="Artist">Artist</label>
+          <input type="text" name="Artist" id="artist" value='' required>
+
+          <label for="Year">Year</label>
+          <input type="number" name="Year" id="year" value='' required>
+
+          <label for="Album">Album</label>
+          <input type="text" name="Album" id="album" value='' required>
+
+          <label class="switch">
+            <input type="checkbox" class="switch-input">
+            <span class="switch-label" data-on="On" data-off="Off"></span>
+            <span class="switch-handle"></span>
+          </label>
+        </div>
+
+        <div class="column column-right">
+          <label for="Image">Image</label>
+          <input type="text" name="Image" value='' id="image">
+
+          <h3>Sources</h3>
+          <label for="mp3">MP3</label>
+          <input type="text" name="mp3" value='' id="mp3">
+
+          <label for="wav">WAV</label>
+          <input type="text" name="wav" value='' id="wav">
+
+          <label for="ogg">OGG</label>
+          <input type="text" name="ogg" value='' id="ogg">
+        </div>
+
+        <div class="cont__form-nav">
+          <div class="form__nav">
+            <input id="reset" class="form-btn" type="reset">reset</input>
+            <input id="save" class="form-btn" type="submit">save</input>
+          </div>
+        </div>
+      </form>
+    </div>
     <div class="js-cover">
       <div class="nav" id="cont-nav"></div>
       <div class="cont-audio"></div>
@@ -47,7 +76,7 @@
   <script src="js/mediator.js"></script>
   <script src="js/singleton.js"></script>
   <script src="js/import.js"></script>
-  <script src="js/importFunctions.js"></script>
+  <script src="js/newSong.js"></script>
   <script src="js/player.js"></script>
   <script src="js/main.js"></script>
 </body>
