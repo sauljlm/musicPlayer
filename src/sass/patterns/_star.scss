@@ -7,6 +7,14 @@
   float: right;
 }
 
+.playingStar {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  left: 30%;
+  bottom: 60px;
+}
+
 .starDefault{
   background-image: url(../img/star.svg);
 }

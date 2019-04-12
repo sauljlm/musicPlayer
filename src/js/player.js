@@ -211,13 +211,63 @@ const Player = (function () {
       }
       return btn;
     }
+
+    createInfo(song) {
+      const beforeInfo = document.querySelector('.contSongInfo');
+      if(beforeInfo) {
+        this.contCover.removeChild(beforeInfo);
+      }
+      console.log(song);
+      const container = document.createElement('div');
+      container.setAttribute('class', 'contSongInfo');
+
+      const title = player.createTitle(song);
+      const album = player.createAlbum(song);
+      const artist = player.createArtist(song);
+      const star = player.createStar(song);
+
+      container.appendChild(title);
+      container.appendChild(album);
+      container.appendChild(artist);
+      container.appendChild(star);
+
+      this.contCover.appendChild(container);
+    }
+
+    createTitle(song) {
+      const playing = singleton.playListDATA;
+      const title = document.createElement('p');
+      title.setAttribute('class', 'playingTitle');
+      title.innerHTML = `${playing[song].title}`;
+      return title;
+    }
+
+    createAlbum(song) {
+      const playing = singleton.playListDATA;
+      const title = document.createElement('p');
+      title.setAttribute('class', 'playingAlbum');
+      title.innerHTML = `${playing[song].album}`;
+      return title;
+    }
+
+    createArtist(song) {
+      const playing = singleton.playListDATA;
+      const title = document.createElement('p');
+      title.setAttribute('class', 'playingArtist');
+      title.innerHTML = `${playing[song].artist}`;
+      return title;
+    }
+
+    createStar() { 
+      const star = document.createElement('button');
+      star.setAttribute('class', 'star playingStar starDefault');
+      return star;
+    }
     /**
      * Disable a button
      * @param {HTMLButtonElement} button
      */
     disableButton (button) {
-      //if(!(button instanceof HTMLButtonElement))
-      //    throw new Error(`Invalid button is not a HTMLButtonElement: ${button}`);
       button.setAttribute('disabled', '');
     }
 
@@ -226,11 +276,7 @@ const Player = (function () {
      * @param {HTMLButtonElement} button
      */
     enableButton(button) {
-      if (!(button instanceof HTMLButtonElement)) {
-        throw new Error(`Invalid button is not a HTMLButtonElement: ${button}`);
-      }
       button.removeAttribute('disabled');
-      button.classList.remove('disabled');
     }
 
     dragAndDrop() {
@@ -247,6 +293,11 @@ const Player = (function () {
         const dataSong = this.dragged.getAttribute('dataSong');
         const songs = singleton.songsDATA;
         const playList = singleton.playListDATA;
+        const btnPlaypase = document.querySelector('.btn-play');
+        const btnBack = document.querySelector('.btn-back');
+        const btnNext = document.querySelector('.btn-next');
+        const btnEdit = document.querySelector('.edit');
+        const btnDelite = document.querySelector('.delite');
 
         if (event.target.className === 'playList') {
           singleton.setPlayList = songs[id];
@@ -257,8 +308,15 @@ const Player = (function () {
           playList.forEach((element, index) => {
             if (element.dataSong === dataSong) {
               singleton.initSong(index);
+              singleton.songPlaying = index;
+              player.createInfo(index);
             }
           });
+          player.enableButton(btnPlaypase);
+          player.enableButton(btnBack);
+          player.enableButton(btnNext);
+          player.enableButton(btnDelite);
+          player.enableButton(btnEdit);
         }
 
         if (event.target.className === 'allsongs') {

@@ -21,8 +21,9 @@ body {
 }
 
 #container {
-  height: 100vh;
+  height: 120vh;
   background-color: rgba(0, 0, 0, 0.9);
+  overflow: hidden;
 }
 
 ::-webkit-scrollbar {

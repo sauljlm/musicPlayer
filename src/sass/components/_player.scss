@@ -18,7 +18,7 @@ audio::-webkit-media-controls-mute-button {
 audio::-webkit-media-controls-play-button {
   display: none;
 }
-
+ 
 audio::-webkit-media-controls-panel {
   background-color: #FF00E4;
 }
@@ -30,4 +30,24 @@ audio::-webkit-media-controls-toggle-closed-captions-button{
 .cont-audio {
   display: flex;
   justify-content: center;
+}
+
+.contSongInfo { 
+  width: 20%;
+  position: absolute;
+  right: 5%;
+  bottom: 5%;
+  color: white;
+  margin-right: 5%;
+}
+.playingTitle {
+  padding: 10px;
+  font-size: 20px;
+  color: #FF00E4;
+}
+.playingAlbum {
+  padding: 15px;
+} 
+.playingArtist {
+  padding: 15px;
 }

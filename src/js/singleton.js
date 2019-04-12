@@ -134,6 +134,11 @@ const Singleton = (function () {
       this.playing = value;
     }
 
+    set songPlaying(value) {
+      playing = value;
+      console.log("playing" + playing);
+    }
+
     setCover(index = playing) {
       if (this.playing === false) {
         document.body.style.backgroundImage = "url('img/default.jpg')";
@@ -195,6 +200,7 @@ const Singleton = (function () {
         this.playing = false;
         this.pause();
       }
+      player.createInfo(playing);
     }
 
     back() {
@@ -211,6 +217,7 @@ const Singleton = (function () {
         this.playing = false;
         this.pause();
       }
+      player.createInfo(playing);
     }
 
     /**
