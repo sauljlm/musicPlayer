@@ -1,5 +1,6 @@
 const singleton = new Singleton();
 const player = new Player('.cont-audio');
+const IMPORT = new Import();
 
 (function () {
   const btnSongs = document.querySelector('#songs');
@@ -9,7 +10,7 @@ const player = new Player('.cont-audio');
 
   // import
   const btnSave = document.querySelector('#save');
-  let validated = false;
+  let validated = 0;
 
   let name = null;
   let artist = null;
@@ -43,7 +44,7 @@ const player = new Player('.cont-audio');
     wav =  validateWav(datawav);
     ogg =  validateOgg(dataogg);
 
-    if(validate) {
+    if(validate >= 9) {
       const newSong = new NewSong(name, artist, year, album, star, image, mp3, wav, ogg);
       addSong(newSong);
     }
@@ -51,16 +52,16 @@ const player = new Player('.cont-audio');
 
   function validate(element) {
     if(element.value) { 
-      validated = true;
+      validated += 1;
       return element.value;
     } else {
-      validated = false;
+      validated -= 1;
       alert(`insert a correct ${element}`);
     }
   }
 
   function validateStar(element) {
-    validated = true;
+    validated += 1;
     return element.checked;
   }
 
@@ -69,10 +70,10 @@ const player = new Player('.cont-audio');
       const re = /\.(?:jpg|png)$/;
 
       if (re.test(element.value)) {
-        validated = true;
+        validated += 1;
         return element.value;
       } else {
-        validated = false;
+        validated -= 1;
         alert(`insert a correct ${element}`);
       }
     }
@@ -83,10 +84,10 @@ const player = new Player('.cont-audio');
       const re = /\.(?:mp3)$/;
 
       if (re.test(element.value)) {
-        validated = true;
+        validated += 1;
         return element.value;
       } else {
-        validated = false;
+        validated -= 1;
         alert(`insert a correct ${element}`);
       }
     }
@@ -97,10 +98,10 @@ const player = new Player('.cont-audio');
       const re = /\.(?:wav)$/;
 
       if (re.test(element.value)) {
-        validated = true;
+        validated += 1;
         return element.value;
       } else {
-        validated = false;
+        validated -= 1;
         alert(`insert a correct ${element}`);
       }
     }
@@ -111,10 +112,10 @@ const player = new Player('.cont-audio');
       const re = /\.(?:ogg)$/;
 
       if (re.test(element.value)) {
-        validated = true;
+        validated += 1;
         return element.value;
       } else {
-        validated = false;
+        validated -= 1;
         alert(`insert a correct ${element}`);
       }
     }

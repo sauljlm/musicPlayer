@@ -77,7 +77,6 @@ const Import = (function () {
       
       btnSave.addEventListener('click', this.getForm);
 
-
       container.appendChild(btnReset);
       container.appendChild(btnSave);
       container.appendChild(nav);

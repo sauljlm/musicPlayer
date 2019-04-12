@@ -110,6 +110,10 @@ const Singleton = (function () {
       return playList;
     }
 
+    get playingDATA() {
+      return playing;
+    }
+
     /**
      * push playlist
      *  @param {object} value
@@ -136,7 +140,6 @@ const Singleton = (function () {
 
     set songPlaying(value) {
       playing = value;
-      console.log("playing" + playing);
     }
 
     setCover(index = playing) {
@@ -200,7 +203,7 @@ const Singleton = (function () {
         this.playing = false;
         this.pause();
       }
-      player.createInfo(playing);
+      player.songActive();
     }
 
     back() {
@@ -217,7 +220,7 @@ const Singleton = (function () {
         this.playing = false;
         this.pause();
       }
-      player.createInfo(playing);
+      player.songActive();
     }
 
     /**

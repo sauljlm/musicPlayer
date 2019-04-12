@@ -37,5 +37,9 @@ body {
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #FF00E4; 
+  background: $primaryColor; 
+}
+
+.songActive {
+  color: $primaryColor !important;
 }

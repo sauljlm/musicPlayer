@@ -38,6 +38,10 @@ body {
   background: #FF00E4;
 }
 
+.songActive {
+  color: #FF00E4 !important;
+}
+
 .contallSongs {
   box-sizing: border-box;
   width: 47.5%;
@@ -112,9 +116,26 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
   width: 20%;
   position: absolute;
   right: 5%;
-  bottom: 5%;
+  bottom: -20%;
   color: white;
   margin-right: 5%;
+}
+
+.playingTitle {
+  padding: 10px;
+  font-size: 25px;
+  color: #FF00E4;
+  padding-bottom: 0;
+}
+
+.playingAlbum {
+  padding: 15px;
+  padding-bottom: 0;
+}
+
+.playingArtist {
+  padding: 15px;
+  padding-bottom: 0;
 }
 
 .header {
@@ -205,6 +226,25 @@ label, input {
 
 #formSort {
   margin-left: -10%;
+}
+
+.pop-up {
+  position: relative;
+  top: -15%;
+  left: 30%;
+  z-index: 5;
+  width: 40%;
+  height: 200px;
+  background-color: black;
+  border: 1px solid #FF00E4;
+  margin: 30% auto;
+  position: fixed;
+  color: white;
+}
+
+.pop-up__messaje {
+  margin: 15% 20%;
+  text-align: center;
 }
 
 button {
@@ -298,6 +338,24 @@ button:focus {
   height: 10px;
   position: absolute;
   right: 10%;
+}
+
+.pop-up__delite {
+  border-radius: 0;
+  width: auto;
+  border: 1px solid white;
+  position: absolute;
+  bottom: 20%;
+  right: 10%;
+}
+
+.pop-up__Cancel {
+  border-radius: 0;
+  width: auto;
+  border: 1px solid white;
+  position: absolute;
+  bottom: 20%;
+  left: 10%;
 }
 
 blockquote:before, blockquote:after,
@@ -472,7 +530,7 @@ input[type=search]:focus {
   line-height: 35px;
 }
 .song:hover {
-  border: 1px solid #ff00e4;
+  border: 1px solid #FF00E4;
   transition: 0.5s;
   padding: 20px 10px;
 }

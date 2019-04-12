@@ -1,7 +1,7 @@
 const Player = (function () {
 
   const contSongs = document.querySelector('.js-songs'); 
-
+  const wrapper = document.querySelector('#container');
   return class Player {
     constructor(contAudio) {
       this.contAudio = document.querySelector(contAudio);
@@ -9,12 +9,13 @@ const Player = (function () {
       this.contAllSongs = document.querySelector('#allSongs');
       this.contPlayList = document.querySelector('#playList');
       this.contCover = document.querySelector('.js-cover');
+      this.songSelected = null;
+      this.arraySelected = null;
       this.ulPlayList = null;
       this.ulList = null;
       this.dragged = null;
       this.btnPlaypase = null;
       this.AUDIO = null;
-      this.singleton = new Singleton();
       this.compose();
       this.dragAndDrop();
     }
@@ -29,15 +30,15 @@ const Player = (function () {
       const navSongs = this.nav();
 
       btnPlaypase.addEventListener('click', () => {
-        this.singleton.changeIco(btnPlaypase);
-        this.singleton.togglePlay();
+        singleton.changeIco(btnPlaypase);
+        singleton.togglePlay();
       });
       this.btnPlaypase = btnPlaypase;
       btnBack.addEventListener('click', () => {
-        this.singleton.back();
+        singleton.back();
       });
       btnNext.addEventListener('click', () => {
-        this.singleton.next();
+        singleton.next();
       });
 
       contSongs.insertBefore(navSongs, this.contAllSongs);
@@ -48,7 +49,7 @@ const Player = (function () {
       this.contAllSongs.appendChild(allSongs);
       this.contPlayList.appendChild(playList);
 
-      this.singleton.audio = this.AUDIO;
+      singleton.audio = this.AUDIO;
 
       this.disableButton(btnPlaypase);
       this.disableButton(btnBack);
@@ -79,6 +80,10 @@ const Player = (function () {
       btnDelite.innerHTML = 'Delite';
       btnEdit.innerHTML = 'Edit';
 
+      btnDelite.addEventListener('click', () => {
+        this.newModal();
+      });
+
       const search = this.createSearch();
 
       sortBy.appendChild(optionDefault);
@@ -95,6 +100,46 @@ const Player = (function () {
       container.appendChild(search);
 
       return container;
+    }
+
+    newModal() {
+      const cont = document.createElement('div');
+      const message = document.createElement('p');
+      const btnDelite = this.btn('class', 'pop-up__delite');
+      const btnCancel = this.btn('class', 'pop-up__Cancel');
+
+      message.innerHTML = 'Are you sure you want to delete the song?';
+      btnDelite.innerHTML = 'Delite';
+      btnCancel.innerHTML = 'Cancel';
+
+      btnCancel.addEventListener('click', () => {
+        wrapper.removeChild(cont);
+      });
+      btnDelite.addEventListener('click', () => {
+        this.deliteSong();
+        wrapper.removeChild(cont);
+      });
+
+      message.setAttribute('class', 'pop-up__messaje');
+      cont.setAttribute('class', 'pop-up');
+
+      cont.appendChild(message);
+      cont.appendChild(btnCancel);
+      cont.appendChild(btnDelite);
+      wrapper.append(cont);
+    }
+
+    deliteSong() {
+      if (this.arraySelected === 'songs') {
+        singleton.songsDATA.splice(this.songSelected, 1);
+        this.composeList();
+        console.log(this.arraySelected);
+      } 
+      if (this.arraySelected === 'playList') {
+        singleton.playListDATA.splice(this.songSelected, 1);
+        this.composePlayList();
+        console.log(this.arraySelected);
+      }
     }
 
     option(value = ' ') {
@@ -142,10 +187,10 @@ const Player = (function () {
     }
 
     composeList(container = this.ulList) {
-      const songs = this.singleton.songsDATA;
+      const songs = singleton.songsDATA;
       this.clear(container);
-      songs.forEach((song, index) => {
 
+      songs.forEach((song, index) => {
         const row = document.createElement('li');
         const star = document.createElement('button');
         star.setAttribute('class', 'star starDefault');
@@ -157,6 +202,25 @@ const Player = (function () {
 
         row.innerHTML = `${song.title}`;
 
+        row.addEventListener('click', (e)=> {
+          document.querySelectorAll('.song').forEach((element)=> {
+            element.classList.remove('songActive');
+          });
+          row.classList.add('songActive');
+          const btnEdit = document.querySelector('.edit');
+          const btnDelite = document.querySelector('.delite');
+ 
+          this.enableButton(btnDelite);
+          this.enableButton(btnEdit);
+          
+          songs.forEach((element, i) => {
+            if (element.dataSong === e.target.getAttribute('dataSong')) {
+              this.songSelected = i;
+              this.arraySelected = 'songs';
+            }
+          });
+        });
+
         row.appendChild(star);
         container.appendChild(row);
       });
@@ -167,7 +231,7 @@ const Player = (function () {
     }
 
     composePlayList(container = this.ulPlayList) {
-      const songs = this.singleton.playListDATA;
+      const songs = singleton.playListDATA;
       this.clear(container);
       songs.forEach((song, index) => {
         const row = document.createElement('li');
@@ -182,11 +246,42 @@ const Player = (function () {
           singleton.initSong(index);
         });
 
+        row.addEventListener('click', (e)=> {
+          document.querySelectorAll('.song').forEach((element)=> {
+            element.classList.remove('songActive');
+          });
+          row.classList.add('songActive');
+          const btnEdit = document.querySelector('.edit');
+          const btnDelite = document.querySelector('.delite');
+ 
+          this.enableButton(btnDelite);
+          this.enableButton(btnEdit);
+          
+          songs.forEach((element, i) => {
+            if (element.dataSong === e.target.getAttribute('dataSong')) {
+              this.songSelected = i;
+              this.arraySelected = 'playList';
+              console.log(this.arraySelected);
+            }
+          });
+        });
+
         row.innerHTML = `${song.title}`;
 
         row.appendChild(star);
         container.appendChild(row);
       });
+    }
+
+    songActive() {
+      const playing = singleton.playingDATA;
+      const playlistDom = document.querySelector('.playList').childNodes;
+      console.log(playlistDom);
+      playlistDom.forEach((element)=> {
+        element.classList.remove('songActive');
+      });
+
+      playlistDom[playing].classList.add('songActive');
     }
 
     audio() {
@@ -195,10 +290,10 @@ const Player = (function () {
       audio.setAttribute('class', 'clearfix');
 
       audio.addEventListener('ended', () => {
-        this.singleton.next();
+        singleton.next();
       });
 
-      this.singleton.setCover();
+      singleton.setCover();
       return audio;
     }
 
@@ -300,8 +395,9 @@ const Player = (function () {
         const btnDelite = document.querySelector('.delite');
 
         if (event.target.className === 'playList') {
-          singleton.setPlayList = songs[id];
+          player.arraySelected = 'playList';
 
+          singleton.setPlayList = songs[id];
           player.composePlayList();
           songs.splice(id, 1);
           player.composeList();
@@ -317,9 +413,11 @@ const Player = (function () {
           player.enableButton(btnNext);
           player.enableButton(btnDelite);
           player.enableButton(btnEdit);
+          player.songActive();
         }
 
         if (event.target.className === 'allsongs') {
+          player.arraySelected = 'songs';
           singleton.setlist = playList[id];
 
           playList.splice(id, 1);

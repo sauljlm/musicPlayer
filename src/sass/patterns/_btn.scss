@@ -16,7 +16,7 @@ button {
   border-radius: 50%;
   transition: 0.5s;
   &:hover {
-    box-shadow: 2px 2px 25px 2px #FF00E4;
+    box-shadow: 2px 2px 25px 2px $primaryColor;
   }
 }
 
@@ -45,7 +45,7 @@ button {
   transition: 0.5s;
   font-size: 20px;
   &:hover {
-    box-shadow: 2px 2px 25px 2px #FF00E4;
+    box-shadow: 2px 2px 25px 2px $primaryColor;
     transition: 0.5s;
   }
 }
@@ -57,10 +57,10 @@ button {
   color: white;
   padding: 10px 20px;
   margin: 1% 10%;
-  border: 1px solid #FF00E4;
+  border: 1px solid $primaryColor;
   &:hover {
     transition: 0.5s;
-    background-color: #FF00E4;
+    background-color: $primaryColor;
     border: 1px solid white;
   }
 }
@@ -70,11 +70,11 @@ button {
   background-size: contain;
   padding: 0.5% 50px;
   height: 30px;
-  border: 1px solid #FF00E4;
+  border: 1px solid $primaryColor;
   transition: 0.5s;
   margin: 0.5% 4%;
   &:hover {
-    box-shadow: 2px 2px 25px 2px #FF00E4;
+    box-shadow: 2px 2px 25px 2px $primaryColor;
   }
 }
 
@@ -89,4 +89,22 @@ button {
   height: 10px;
   position: absolute;
   right: 10%;
+}
+
+.pop-up__delite {
+  border-radius: 0;
+  width: auto;
+  border: 1px solid white;
+  position: absolute;
+  bottom: 20%;
+  right: 10%;
+}
+
+.pop-up__Cancel {
+  border-radius: 0;
+  width: auto;
+  border: 1px solid white;
+  position: absolute;
+  bottom: 20%;
+  left: 10%;
 }

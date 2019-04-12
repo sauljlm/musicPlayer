@@ -1,11 +1,11 @@
 audio {
   width: 40%;
-  background-color: #FF00E4;
+  background-color: $primaryColor;
   -webkit-transition:all 0.5s linear;
   -moz-transition:all 0.5s linear;
   -o-transition:all 0.5s linear;
   transition:all 0.5s linear;
-  box-shadow: 2px 2px 25px 2px #FF00E4;
+  box-shadow: 2px 2px 25px 2px $primaryColor;
   border-radius: none;
   position: absolute;
   bottom: 0;
@@ -20,7 +20,7 @@ audio::-webkit-media-controls-play-button {
 }
  
 audio::-webkit-media-controls-panel {
-  background-color: #FF00E4;
+  background-color: $primaryColor;
 }
 
 audio::-webkit-media-controls-toggle-closed-captions-button{
@@ -36,18 +36,21 @@ audio::-webkit-media-controls-toggle-closed-captions-button{
   width: 20%;
   position: absolute;
   right: 5%;
-  bottom: 5%;
+  bottom: -20%;
   color: white;
   margin-right: 5%;
 }
 .playingTitle {
   padding: 10px;
-  font-size: 20px;
-  color: #FF00E4;
+  font-size: 25px;
+  color: $primaryColor;
+  padding-bottom: 0;
 }
 .playingAlbum {
   padding: 15px;
+  padding-bottom: 0;
 } 
 .playingArtist {
   padding: 15px;
+  padding-bottom: 0;
 }

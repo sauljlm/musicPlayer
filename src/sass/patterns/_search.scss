@@ -19,6 +19,6 @@ input[type=search] {
 input[type=search]:focus {
 	width: 130px;
 	background-color: #fff;
-	border-color: #FF00E4;
-	box-shadow: 0 0 5px #FF00E4;
+	border-color: $primaryColor;
+	box-shadow: 0 0 5px $primaryColor;
 }

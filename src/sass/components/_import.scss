@@ -8,7 +8,7 @@
   width: 50%;
   height: 300px;
   float: left;
-  border: 1px solid #FF00E4;
+  border: 1px solid $primaryColor;
   padding: 2%;
 }
 
@@ -17,12 +17,12 @@
   width:50%;
   height: 300px;
   float: left;
-  border: 1px solid #FF00E4;
+  border: 1px solid $primaryColor;
   padding: 2%;
 }
 
 .form-import {
-  border: 1px solid #FF00E4;
+  border: 1px solid $primaryColor;
   margin: 2.5% 0;
   height: 300px;
   h3 {
@@ -31,7 +31,7 @@
 }
 
 .formTitle {
-  color: #FF00E4;
+  color: $primaryColor;
   margin-left: 5%;
   font-weight: 200;
   position: absolute;

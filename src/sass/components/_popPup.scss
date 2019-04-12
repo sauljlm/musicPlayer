@@ -1,0 +1,18 @@
+.pop-up {
+  position: relative;
+  top: -15%;
+  left: 30%;
+  z-index: 5;
+  width: 40%;
+  height: 200px;
+  background-color: black;
+  border: 1px solid $primaryColor;
+  margin: 30% auto;
+  position: fixed;
+  color: white;
+} 
+
+.pop-up__messaje {
+  margin: 15% 20%;
+  text-align: center;
+}
