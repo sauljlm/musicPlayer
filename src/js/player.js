@@ -192,8 +192,7 @@ const Player = (function () {
 
       songs.forEach((song, index) => {
         const row = document.createElement('li');
-        const star = document.createElement('button');
-        star.setAttribute('class', 'star starDefault');
+        const star = this.star(songs, index);
         row.setAttribute('id', `${index}`);
         row.setAttribute('dataSong', `${songs[index].dataSong}`);
         row.setAttribute('class', 'song clearfix');
@@ -235,7 +234,7 @@ const Player = (function () {
       this.clear(container);
       songs.forEach((song, index) => {
         const row = document.createElement('li');
-        const star = document.createElement('button');
+        const star = this.star(songs, index);
         star.setAttribute('class', 'star starDefault');
         row.setAttribute('id', `${index}`);
         row.setAttribute('dataSong', `${songs[index].dataSong}`);
@@ -273,6 +272,27 @@ const Player = (function () {
       });
     }
 
+    star(array = singleton.songsDATA, index) {
+      
+      const star = document.createElement('button');
+      star.addEventListener('click', ()=> {
+        if(array[index].started) {
+          array[index].started = false;
+          star.setAttribute('class', 'star starDefault');
+        } else {
+          array[index].started = true;
+          star.setAttribute('class', 'star starActive');
+        }
+      });
+      if (array[index].started) {
+        star.setAttribute('class', 'star starActive');
+      } else {
+        star.setAttribute('class', 'star starDefault');
+      }
+      // console.log(array[index].started);
+      return star;
+    }
+
     songActive() {
       const playing = singleton.playingDATA;
       const playlistDom = document.querySelector('.playList').childNodes;
@@ -307,7 +327,7 @@ const Player = (function () {
       return btn;
     }
 
-    createInfo(song) {
+    createInfo(playList, song) {
       const beforeInfo = document.querySelector('.contSongInfo');
       if(beforeInfo) {
         this.contCover.removeChild(beforeInfo);
@@ -319,7 +339,7 @@ const Player = (function () {
       const title = player.createTitle(song);
       const album = player.createAlbum(song);
       const artist = player.createArtist(song);
-      const star = player.createStar(song);
+      const star = player.star(playList, song);
 
       container.appendChild(title);
       container.appendChild(album);
@@ -351,12 +371,6 @@ const Player = (function () {
       title.setAttribute('class', 'playingArtist');
       title.innerHTML = `${playing[song].artist}`;
       return title;
-    }
-
-    createStar() { 
-      const star = document.createElement('button');
-      star.setAttribute('class', 'star playingStar starDefault');
-      return star;
     }
     /**
      * Disable a button
@@ -405,7 +419,7 @@ const Player = (function () {
             if (element.dataSong === dataSong) {
               singleton.initSong(index);
               singleton.songPlaying = index;
-              player.createInfo(index);
+              player.createInfo(playList, index);
             }
           });
           player.enableButton(btnPlaypase);

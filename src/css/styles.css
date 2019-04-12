@@ -120,6 +120,13 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
   color: white;
   margin-right: 5%;
 }
+.contSongInfo .star {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  left: 30%;
+  bottom: 60px;
+}
 
 .playingTitle {
   padding: 10px;
@@ -557,7 +564,7 @@ input[type=search]:focus {
 }
 
 .starActive {
-  background-image: url(../img/.starActive.svg);
+  background-image: url(../img/starActive.svg);
 }
 
 /*# sourceMappingURL=styles.css.map */

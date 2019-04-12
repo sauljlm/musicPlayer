@@ -39,6 +39,13 @@ audio::-webkit-media-controls-toggle-closed-captions-button{
   bottom: -20%;
   color: white;
   margin-right: 5%;
+  .star {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    left: 30%;
+    bottom: 60px;
+  }
 }
 .playingTitle {
   padding: 10px;
